@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Header</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@6.6.6/css/flag-icons.min.css" />
+    </head>
+    <div class="header">
+        <div class="title">{{header_title}}</div>
+        <div class="user">
+            <div class="user-image">AE</div>
+            <div class="user">
+                <div class="dropdown">
+                    <button class="dropbtn">{{user_name}}
+                        <fa-icon [icon]="faCaretDown"></fa-icon>
+                    </button>
+                    <div class="dropdown-content">
+                        <a href="#">User Settings</a>
+                    </div> 
+                </div>
+            </div>
+        </div>
+        <div class="notification">
+            <a href="#" class="notification">
+                <fa-icon [icon]="faEnvelope"></fa-icon>
+                <span class="badge">3</span>
+            </a>
+        </div>
+        <div class="language">
+            <span class="fi fi-gb"></span>
+            <div class="dropdown">
+                <button class="dropbtn">language
+                    <fa-icon [icon]="faCaretDown"></fa-icon>
+                </button>
+                <div class="dropdown-content">
+                  <a href="#">English</a>
+                  <a href="#">French</a>
+                </div> 
+            </div>
+        </div>
+    </div>
+</html>
+
+

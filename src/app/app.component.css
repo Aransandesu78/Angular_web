@@ -1,0 +1,96 @@
+.header {
+  position: fixed;
+  top: 0px;
+  width: 100%;
+}
+
+.container {
+  height: auto;
+}
+
+.main-container {
+  display: flex;
+  height: auto;
+}
+
+.side-nav {
+  width: 170px;
+  height: 100%;
+  margin-top: 80px;
+  left: 0;
+  background-color: #464748;
+  color: #fff;
+  box-shadow: 5px 5px 5px #939393;
+  position: fixed;
+  overflow-y : auto;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.main-content {
+  display: block;
+}
+
+.main-container .main-content .adas_button {
+  padding: 10px;
+  height: auto;
+  bottom: 15px;  
+  margin-left: 95%;
+  border-radius: 100%;
+  border-color: black;
+  color: rgb(0, 0, 0);
+  font: Arial, Helvetica, sans-serif;
+  background-color:  #e0D4cf;
+  position: fixed;
+}
+
+.adas_button:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
+.adas_button .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+.adas_button .tooltiptext {
+  visibility: hidden;
+  width: 100px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -60px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+/* Responsive layout - when the screen is less than 700px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 700px) {
+  .main-container {
+    flex-direction: column;
+  }
+}
+
+/* Responsive layout - when the screen is less than 400px wide, make the navigation links stack on top of each other instead of next to each other */
+@media screen and (max-width: 400px) {
+  .main-container .side-nav {
+    float: none;
+    width: 100%;
+  }
+}
+
+
+

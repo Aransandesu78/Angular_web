@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Navigation Section</title>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=logout" />
+    </head>
+    <div class="nav-items">
+        <div class="options">
+            <div class="nav-item">
+                <fa-icon [icon]="faDashboard"></fa-icon>
+                <a routerLink="/dashboard" routerLinkActive="active"> Dashboard</a>
+            </div>
+            <div class="nav-item">
+                <fa-icon [icon]="faChartSimple"></fa-icon>
+                <a routerLink="/statistics" routerLinkActive="active"> Statistics</a>
+            </div>
+            <div class="nav-item">
+                <fa-icon [icon]="faNewspaper"></fa-icon>
+                <a routerLink="/history" routerLinkActive="active"> History</a>
+            </div>
+            <div class="nav-item">
+                <fa-icon [icon]="faInfo"></fa-icon>
+                <a routerLink="/information" routerLinkActive="active"> Information</a>
+            </div>
+            <div class="nav-item">
+                <fa-icon [icon]="faGear"></fa-icon>
+                <a routerLink="/settings" routerLinkActive="active"> Settings</a>
+            </div>
+            <div class="nav-item">
+                <span class="material-symbols-outlined">logout</span>
+                <span> Logout</span>
+            </div>
+        </div>
+        <div class="menu">
+            <button class="button" (click)="onSidebarToggle()">
+                <fa-icon [icon]="faCaretRight"></fa-icon>
+                <span class="tooltiptext">Menu toggle</span>
+            </button>
+        </div>
+    </div>
+</html>

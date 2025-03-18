@@ -1,0 +1,9 @@
+.top {
+    margin-bottom: 25px;
+    border-bottom-style: solid;
+    border-color: black; 
+}
+
+.header-title .adas-title {
+    margin-top: 10px;
+}

@@ -1,0 +1,13 @@
+.history-header {
+    margin-bottom: 30px;
+    border-bottom-style: solid;
+    border-color: black; 
+}
+
+.history-header .adas-filter {
+    margin-bottom: 20px;
+    margin-top: 10px;
+    border-radius: 25%;
+    padding: 10px;
+    background-color: #e0D4cf;
+}
