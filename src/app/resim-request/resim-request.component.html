@@ -1,19 +1,36 @@
 <!-- Creation d'une demande resim -->
 <div class="resim-request">
-    <div class="adas-project">
-        <h3>ADAS project</h3>
-        <p>ADAS attributes</p>
+    <div class="main-content">
+        <div class="adas-content">
+            <div class="adas-project">
+                <h3>ADAS</h3>
+                <p>ADAS attributes</p>
+            </div>
+            <div class="adas-sensor">
+                <h3>Sensors</h3>
+                <p>Sensors attributes</p>
+            </div>
+            <div class="adas-follow-up">
+                <h3>ADAS follow-up</h3>
+                <p>follow-up attributes</p>
+            </div>
+        </div>
+        <button class="option-selection">
+            <fa-icon [icon]="faCaretDown"></fa-icon>
+            <span class="tooltiptext">Display comments</span>
+        </button> 
     </div>
-    <div class="adas-sensor">
-        <h3>Sensors</h3>
-        <p>Sensors attributes</p>
+    <!-- Creation d'un formulaire -->
+    <div class="optional-content">
+        <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+            <div class="resim-comments">
+                <label for="comments" class="form-label">Comments : </label>
+                <textarea id="comments" type="text" formControlName="resim_comments" class="form-comments"></textarea>
+            </div>
+            <div class="results-comments">
+                <label for="results" class="form-label">Results : </label>
+                <textarea id="results" type="text" formControlName="results_comments" class="form-comments"></textarea>
+            </div>
+        </form>
     </div>
-    <div class="adas-follow-up">
-        <h3>ADAS follow-up</h3>
-        <p>follow-up attributes</p>
-    </div>
-</div>
-<div class="optional-content">
-    <div class="resim-comments"></div>
-    <div class="results-comments"></div>
 </div>

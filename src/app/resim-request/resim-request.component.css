@@ -1,0 +1,94 @@
+.resim-request {
+    padding: 15px;
+    color: black;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+    text-align: center;
+}
+
+
+.main-content {
+    background-color: #d4d1d3bb;
+    border-radius: 10px;
+    border-width: 2px;
+    border-style: solid;
+    text-align: center;
+    padding: 10px;
+    margin: auto;
+    display: inline-block;
+    height: auto;
+}
+
+.adas-content {
+    display: flex;
+    width: 100%;
+    margin: auto;
+    text-align: center;
+}
+
+.adas-project, .adas-sensor, .adas-follow-up {
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 10px;
+}
+
+.option-selection {
+    margin-top: 10px;
+    border-radius: 4px;
+    padding: 2px;
+    background-color: #e0D4cf;
+    position: relative;
+    border-bottom: 1px dotted black;
+}
+
+.tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+
+.option-selection:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+  }
+
+.optional-content {
+    background-color: #d4d1d3bb;
+    margin: auto;
+    width: auto;
+    padding: 25px;
+    border-radius: 10px;
+    border-width: 2px;
+    border-style: solid;
+    min-height: 100px;
+    display: inline-block;
+}
+
+.resim-comments, .results-comments {
+    padding: 15px;
+    display: inline-block;
+}
+
