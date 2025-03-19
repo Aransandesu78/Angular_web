@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { Column } from '../../column';
+import { Column } from '../../object';
 import { RouterModule } from '@angular/router';
 
 @Component({

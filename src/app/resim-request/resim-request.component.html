@@ -4,15 +4,39 @@
         <div class="adas-content">
             <div class="adas-project">
                 <h3>ADAS</h3>
-                <p>ADAS attributes</p>
+                <ul>
+                    <li>PlatformVehicule: {{adas.PlatformVehicule}}</li>
+                    <li>projectVehicule: {{adas.projectVehicule}}</li>
+                    <li>ADASDrivingOwner: {{adas.ADASDrivingOwner}}</li>
+                    <li>TypeDriving: {{adas.TypeDriving}}</li>
+                    <li>ADASApplicantOwner: {{adas.ADASApplicantOwner}}</li>
+                </ul>
             </div>
             <div class="adas-sensor">
                 <h3>Sensors</h3>
-                <p>Sensors attributes</p>
+                <ul>
+                    <li>silSWFrCam: {{sensor.silSWFrCam}}</li>
+                    <li>linkSilSWFrCam: {{sensor.linkSilSWFrCam}}</li>
+                    <li>silSWFrRad: {{sensor.silSWFrRad}}</li>
+                    <li>linkSilSWFrRad: {{sensor.linkSilSWFrRad}}</li>
+                    <li>silSWSideRad: {{sensor.silSWSideRad}}</li>
+                    <li>linkSilSWSideRad: {{sensor.linkSilSWSideRad}}</li>
+                    <li>silSWAdas: {{sensor.silSWAdas}}</li>
+                    <li>CalibrationSwAdas: {{sensor.CalibrationSwAdas}}</li>
+                    <li>linkSilSWAdas: {{sensor.linkSilSWAdas}}</li>
+                </ul>
             </div>
             <div class="adas-follow-up">
                 <h3>ADAS follow-up</h3>
-                <p>follow-up attributes</p>
+                <ul>
+                    <li>numDDV: {{follow.numDDV}}</li>
+                    <li>dateCreationResimLoopRequest: {{follow.dateCreationResimLoopRequest}}</li>
+                    <li>DatelastModif: {{follow.DatelastModif}}</li>
+                    <li>Dateplanned: {{follow.Dateprevu}}</li>
+                    <li>dateEndResimLoop: {{follow.dateEndResimLoop}}</li>
+                    <li>stateResimLoopStatus: {{follow.stateResimLoopStatus}}</li>
+                    <li>stateADASStatus: {{follow.stateADASStatus}}</li>
+                </ul>
             </div>
         </div>
         <button class="option-selection">
@@ -25,11 +49,11 @@
         <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
             <div class="resim-comments">
                 <label for="comments" class="form-label">Comments : </label>
-                <textarea id="comments" type="text" formControlName="resim_comments" class="form-comments"></textarea>
+                <textarea id="comments" rows="3" cols="25" type="text" formControlName="resim_comments" class="form-comments"></textarea>
             </div>
             <div class="results-comments">
                 <label for="results" class="form-label">Results : </label>
-                <textarea id="results" type="text" formControlName="results_comments" class="form-comments"></textarea>
+                <textarea id="results" rows="3" cols="25" type="text" formControlName="results_comments" class="form-comments"></textarea>
             </div>
         </form>
     </div>
