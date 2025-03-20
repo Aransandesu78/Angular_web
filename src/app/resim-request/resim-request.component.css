@@ -91,11 +91,19 @@
     border-width: 2px;
     border-style: solid;
     min-height: 100px;
-    display: inline-block;
+    display: flex;
 }
 
 .resim-comments, .results-comments {
     padding: 15px;
-    display: inline-block;
+    display: inline-flex;
+}
+
+.form-label {
+    margin-left: 10px;
+}
+
+.form-comments {
+    margin-left: 10px;
 }
 
