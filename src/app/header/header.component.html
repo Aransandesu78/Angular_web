@@ -15,13 +15,13 @@
                         <fa-icon [icon]="faCaretDown"></fa-icon>
                     </button>
                     <div class="dropdown-content">
-                        <a href="#">User Settings</a>
+                        <a routerLink="/user" routerLinkActive="active">User Settings</a>
                     </div> 
                 </div>
             </div>
         </div>
         <div class="notification">
-            <a href="#" class="notification">
+            <a class="notification" routerLink="/bucket" routerLinkActive="active">
                 <fa-icon [icon]="faEnvelope"></fa-icon>
                 <span class="badge">3</span>
             </a>

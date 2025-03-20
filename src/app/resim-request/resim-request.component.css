@@ -1,13 +1,17 @@
 .resim-request {
     padding: 15px;
     color: black;
-    margin-top: 10px;
+    margin-top: 30px;
     margin-bottom: 10px;
     width: 1000px;
     text-align: center;
     display: block;
 }
 
+h3 {
+    margin-bottom: 15px;
+    border-bottom: 2px solid;
+}
 
 .main-content {
     background-color: #d4d1d3bb;
@@ -24,7 +28,7 @@
 .adas-content {
     display: flex;
     width: 100%;
-    text-align: center;
+    text-align: justify;
 }
 
 .adas-project, .adas-sensor, .adas-follow-up {
@@ -36,6 +40,7 @@
     border-style: solid;
     background-color: whitesmoke;
     padding: 30px;
+    width: 325px;
 }
 
 .option-selection {

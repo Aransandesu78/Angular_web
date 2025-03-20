@@ -36,9 +36,9 @@ export interface Sensors {
 
 export interface Follow {
     numDDV: string;
-    dateCreationResimLoopRequest?: Date;
-    DatelastModif?: Date;
-    Dateprevu?: Date;
+    dateCreationResimLoopRequest: Date;
+    DatelastModif: Date;
+    Dateprevu: Date;
     dateEndResimLoop?: Date; 
     stateResimLoopStatus: string;
     stateADASStatus: string; 

@@ -28,12 +28,13 @@
             </div>
             <div class="adas-follow-up">
                 <h3>ADAS follow-up</h3>
+                <form ></form>
                 <ul>
                     <li>numDDV: {{follow.numDDV}}</li>
-                    <li>dateCreationResimLoopRequest: {{follow.dateCreationResimLoopRequest}}</li>
-                    <li>DatelastModif: {{follow.DatelastModif}}</li>
-                    <li>Dateplanned: {{follow.Dateprevu}}</li>
-                    <li>dateEndResimLoop: {{follow.dateEndResimLoop}}</li>
+                    <li>dateCreationResimLoopRequest: {{follow.dateCreationResimLoopRequest | date: eu_date_format}}</li>
+                    <li>DatelastModif: {{follow.DatelastModif | date: eu_date_format}}</li>
+                    <li>Dateplanned: {{follow.Dateprevu | date: eu_date_format}}</li>
+                    <li>dateEndResimLoop: {{follow.dateEndResimLoop | date: eu_date_format}}</li>
                     <li>stateResimLoopStatus: {{follow.stateResimLoopStatus}}</li>
                     <li>stateADASStatus: {{follow.stateADASStatus}}</li>
                 </ul>

@@ -14,6 +14,12 @@ import { Adas, Sensors, Follow, Comments } from '../object';
 export class ResimRequestComponent {
   faCaretDown = faCaretDown;
   faCaretUp = faCaretUp;
+
+  status_request: string = "Awaiting";
+  statuts = ['Awaiting', 'Approved', 'Refused']; // Etats pour les boutons à saisir pour le suivi
+  role: string = 'user'; // On définit le rôle de l'utilisateur
+  current_date : Date = new Date() // Un exemple pour l'affichage
+  eu_date_format = 'dd/MM/yyyy';
   
   formGroup = new FormGroup({
     resim_comments : new FormControl(''),
@@ -43,8 +49,12 @@ export class ResimRequestComponent {
 
   follow : Follow = {
     numDDV: "208.28",
-    stateResimLoopStatus: "Finished",
-    stateADASStatus: "Finished",
+    dateCreationResimLoopRequest: this.current_date,
+    DatelastModif: this.current_date,
+    Dateprevu: this.current_date,
+    dateEndResimLoop: this.current_date,
+    stateResimLoopStatus: this.status_request,
+    stateADASStatus: this.status_request,
   }
 
   comment : Comments = {
