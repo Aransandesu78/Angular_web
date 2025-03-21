@@ -4,6 +4,7 @@ import { SideNavComponent } from "./side-nav/side-nav.component";
 import { MainComponent } from "./main/main.component";
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
+// import { User } from './object';
 
 @Component({
   standalone: true,
@@ -15,10 +16,18 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
 export class AppComponent {
   title = 'ADAS Synchro RESIM TOOL';
   faPlus = faPlus;
-  user_name = "Alain EENSCHOOTEN";
+  
+  // Définition de l'utilisateur
+  user_name : string = 'Alain';
+  user_last_name : string = 'EENSCHOOTEN';
+  user_ipn!: string;
+  user_status!: boolean;
+
   newSidenavLeft! : number;
   newMainLeft! : number;
   isSideNavOpen! : boolean;
+
+  // myuser = new User(); à mettre pour plus tard
 
   // Redimensionner en px les propriété css margin-left en px le side-nav et le main component
   resize(val: boolean) : void {

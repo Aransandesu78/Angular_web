@@ -28,7 +28,20 @@
             </div>
             <div class="adas-follow-up">
                 <h3>ADAS follow-up</h3>
-                <form ></form>
+                <div class="status-container">
+                    <label>
+                        <input type="radio" [value]="'refused'" [formControl]="statutControl" [disabled]="!isAdmin">
+                            Refused
+                    </label>
+                    <label>
+                        <input type="radio" [value]="'awaiting'" [formControl]="statutControl" [disabled]="!isAdmin">
+                            Awaiting
+                    </label>
+                    <label>
+                        <input type="radio" [value]="'validated'" [formControl]="statutControl" [disabled]="!isAdmin">
+                            Validated
+                    </label>
+                </div>
                 <ul>
                     <li>numDDV: {{follow.numDDV}}</li>
                     <li>dateCreationResimLoopRequest: {{follow.dateCreationResimLoopRequest | date: eu_date_format}}</li>
@@ -37,6 +50,9 @@
                     <li>dateEndResimLoop: {{follow.dateEndResimLoop | date: eu_date_format}}</li>
                     <li>stateResimLoopStatus: {{follow.stateResimLoopStatus}}</li>
                     <li>stateADASStatus: {{follow.stateADASStatus}}</li>
+                    <li>dateModifStatusBuckettemp: {{follow.dateModifStatusBuckettemp | date: eu_date_format}}</li>
+                    <li>statusBuckettemp: {{follow.statusBuckettemp}}</li>
+                    <li>associateResimForm: {{follow.associateResimForm}}</li>
                 </ul>
             </div>
         </div>
@@ -45,9 +61,9 @@
             <span class="tooltiptext">Display comments</span>
         </button> 
     </div>
-    <!-- Creation d'un formulaire -->
+    <!-- Creation d'une section commentaires -->
     <div class="optional-content">
-        <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+        <form [formGroup]="formGroup">
             <div class="resim-comments">
                 <label for="comments" class="form-label">Comments : </label>
                 <textarea id="comments" rows="3" cols="25" type="text" formControlName="resim_comments" class="form-comments"></textarea>
@@ -56,6 +72,7 @@
                 <label for="results" class="form-label">Results : </label>
                 <textarea id="results" rows="3" cols="25" type="text" formControlName="results_comments" class="form-comments"></textarea>
             </div>
+            <button type="submit" class="btn-submit">Submit</button>
         </form>
     </div>
 </div>

@@ -14,6 +14,7 @@ import { RouterModule } from '@angular/router';
 export class HeaderComponent {
   @Input() header_title! : string;  
   @Input() user_name! : string;
+  @Input() user_lastname!: string;
   faEnvelope = faEnvelope; 
   faCaretDown = faCaretDown;
 }
