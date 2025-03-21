@@ -12,21 +12,22 @@ The angular application tool offers a better way to illustrate all resim request
 
 Install [Node.js](https://nodejs.org/fr) to install Angular CLI using the following command line with npm package manager. 
 
-'''bash
+```bash
 npm install -g @angular/cli
-'''
+```
 
 From the command line on your local directory using ssh protocol.
 
-'''bash
+```bash
 git clone git@github.com:Aransandesu78/Angular_web.git
-'''
+```
 
 ## Authors and acknowledgment
 
 With many thanks from Digital Renault team and ADAS Resim Team.
 
 Business Owner : Thibault BRUHIERE
+
 Product Owner and Software Developper : Alain EENSCHOOTEN  
 
 ## Project status
