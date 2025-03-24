@@ -2,7 +2,6 @@
     width: 100%;
     height: 100%;
     margin-top: 100px;
-    padding: 20px;
 }
   
 
@@ -32,15 +31,13 @@
 }
 
 .expanded {
-    margin-left: 60px; /* Quand le menu est ouvert */
+    margin-left: 60px; 
     transition: 0.15s;
     transition-timing-function: linear;
-
 }
   
 .collapsed {
-    margin-left: 190px; /* Quand le menu est fermé */
+    margin-left: 140px;
     transition-delay: 0.15s;
     transition-timing-function: linear;
 }
-

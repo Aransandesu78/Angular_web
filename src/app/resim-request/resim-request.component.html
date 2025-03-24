@@ -4,18 +4,30 @@
         <div class="adas-content">
             <div class="adas-project">
                 <h3>ADAS</h3>
-                <ul>
-                    <li>PlatformVehicule: {{adas.PlatformVehicule}}</li>
-                    <li>projectVehicule: {{adas.projectVehicule}}</li>
-                    <li>ADASDrivingOwner: {{adas.ADASDrivingOwner}}</li>
-                    <li>TypeDriving: {{adas.TypeDriving}}</li>
-                    <li>ADASApplicantOwner: {{adas.ADASApplicantOwner}}</li>
-                </ul>
+                <p>{{adas.PlatformVehicule}} {{adas.projectVehicule}} {{adas.ADASDrivingOwner}} {{adas.TypeDriving}}</p>
+                <p>ADAS Requester : {{adas.ADASApplicantOwner}}</p>
             </div>
             <div class="adas-sensor">
                 <h3>Sensors</h3>
-                <ul>
-                    <li>silSWFrCam: {{sensor.silSWFrCam}}</li>
+                <div class="top">
+                    <div class="frcam">
+                        <h4>Front Cam</h4>
+                    </div>
+                    <div class="frrad">
+                        <h4>Front Rad</h4>
+                    </div>
+                </div>
+                <div class="bottom">
+                    <div class="siderad">
+                        <h4>Side Rad</h4>
+                    </div>
+                    <div class="swadas">
+                        <h4>SW ADAS</h4>
+                    </div>
+                </div>
+            
+                <!-- <ul>
+                    <li>SW FrCam: {{sensor.silSWFrCam}}</li>
                     <li>linkSilSWFrCam: {{sensor.linkSilSWFrCam}}</li>
                     <li>silSWFrRad: {{sensor.silSWFrRad}}</li>
                     <li>linkSilSWFrRad: {{sensor.linkSilSWFrRad}}</li>
@@ -24,25 +36,11 @@
                     <li>silSWAdas: {{sensor.silSWAdas}}</li>
                     <li>CalibrationSwAdas: {{sensor.CalibrationSwAdas}}</li>
                     <li>linkSilSWAdas: {{sensor.linkSilSWAdas}}</li>
-                </ul>
+                </ul> -->
             </div>
             <div class="adas-follow-up">
                 <h3>ADAS follow-up</h3>
-                <div class="status-container">
-                    <label>
-                        <input type="radio" [value]="'refused'" [formControl]="statutControl" [disabled]="!isAdmin">
-                            Refused
-                    </label>
-                    <label>
-                        <input type="radio" [value]="'awaiting'" [formControl]="statutControl" [disabled]="!isAdmin">
-                            Awaiting
-                    </label>
-                    <label>
-                        <input type="radio" [value]="'validated'" [formControl]="statutControl" [disabled]="!isAdmin">
-                            Validated
-                    </label>
-                </div>
-                <ul>
+                <!-- <ul>
                     <li>numDDV: {{follow.numDDV}}</li>
                     <li>dateCreationResimLoopRequest: {{follow.dateCreationResimLoopRequest | date: eu_date_format}}</li>
                     <li>DatelastModif: {{follow.DatelastModif | date: eu_date_format}}</li>
@@ -53,7 +51,7 @@
                     <li>dateModifStatusBuckettemp: {{follow.dateModifStatusBuckettemp | date: eu_date_format}}</li>
                     <li>statusBuckettemp: {{follow.statusBuckettemp}}</li>
                     <li>associateResimForm: {{follow.associateResimForm}}</li>
-                </ul>
+                </ul> -->
             </div>
         </div>
         <button class="option-selection" (click)="toggleDiv()">

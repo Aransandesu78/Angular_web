@@ -32,9 +32,9 @@ export class ResimRequestComponent {
   adas : Adas = {
     PlatformVehicule : "Sweet500",
     projectVehicule : "BCB",
-    ADASDrivingOwner : "Renault",
+    ADASDrivingOwner : "AEB",
     TypeDriving : "Certif",
-    ADASApplicantOwner : "Renault",
+    ADASApplicantOwner : "AEB",
   } 
 
   sensor : Sensors = {
@@ -63,10 +63,6 @@ export class ResimRequestComponent {
   }
 
   comment!: Comments;
-
-  // onSubmit() {
-    
-  // }
 
   toggleDiv() {
     this.isVisible = !this.isVisible;

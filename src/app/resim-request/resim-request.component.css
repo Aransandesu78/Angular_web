@@ -40,7 +40,31 @@ h3 {
     border-style: solid;
     background-color: whitesmoke;
     padding: 30px;
-    width: 400px;
+}
+
+.adas-project {
+    width: 20%;
+}
+
+.adas-sensor {
+    width: 60%;
+    display: block;
+}
+
+.adas-follow-up {
+    width: 20%;
+}
+
+.top {
+    display: flex;
+}
+
+.frcam, .frrad {
+    padding: 10px;
+}
+
+.bottom {
+    display: flex;
 }
 
 .option-selection {
@@ -89,7 +113,7 @@ h3 {
 
 .optional-content {
     background-color: #d4d1d3bb;
-    margin-left: 250px;
+    margin-left: 150px;
     width: 730px;
     padding: 25px;
     border-radius: 10px;

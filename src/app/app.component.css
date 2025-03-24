@@ -10,11 +10,12 @@
 
 .main-container {
   display: flex;
-  height: auto;
+  height: 100%;
+  width: 100%;
 }
 
 .side-nav {
-  width: 170px;
+  width: auto;
   height: 100%;
   margin-top: 80px;
   left: 0;
@@ -29,9 +30,11 @@
 
 .main-content {
   display: block;
+  width: 75%;
+  margin-left: 5%;
 }
 
-.main-container .main-content .adas_button {
+.adas_button {
   padding: 10px;
   height: auto;
   bottom: 15px;  
@@ -91,6 +94,7 @@
     width: 100%;
   }
 }
+
 
 
 
