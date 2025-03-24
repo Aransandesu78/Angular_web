@@ -56,13 +56,13 @@
                 </ul>
             </div>
         </div>
-        <button class="option-selection">
+        <button class="option-selection" (click)="toggleDiv()">
             <fa-icon [icon]="faCaretDown"></fa-icon>
             <span class="tooltiptext">Display comments</span>
         </button> 
     </div>
     <!-- Creation d'une section commentaires -->
-    <div class="optional-content">
+    <div class="optional-content"  [ngClass]="{'show' : isVisible, 'hide' : !isVisible}">
         <form [formGroup]="formGroup">
             <div class="resim-comments">
                 <label for="comments" class="form-label">Comments : </label>

@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faCaretDown, faCaretUp } from '@fortawesome/free-solid-svg-icons';
+import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Adas, Sensors, Follow, Comments } from '../object';
 
@@ -13,17 +13,15 @@ import { Adas, Sensors, Follow, Comments } from '../object';
 })
 export class ResimRequestComponent {
   faCaretDown = faCaretDown;
-  faCaretUp = faCaretUp;
+  isVisible: boolean = false; 
 
   @Input() isAdmin: boolean = false; // Détermine si l'utilisateur est admin 
   statutControl = new FormControl('awaiting'); // Valeur par défaut
 
   status_request = 'Awaiting'; 
   status: [string, string, string] = ['Awaiting', 'Approved', 'Refused']; // Etats pour les boutons à saisir pour le suivi
-  role: string = 'user'; // On définit le rôle de l'utilisateur
   current_date : Date = new Date() // Un exemple pour l'affichage
-  eu_date_format: string = 'yyyy/MM/dd';
-  id: number = 0; 
+  eu_date_format: string = 'yyyy/MM/dd'; 
 
   formGroup = new FormGroup({
     resim_comments : new FormControl(''),
@@ -70,5 +68,8 @@ export class ResimRequestComponent {
     
   // }
 
+  toggleDiv() {
+    this.isVisible = !this.isVisible;
+  }
 
 }
