@@ -3,7 +3,7 @@
     color: black;
     margin-top: 30px;
     margin-bottom: 10px;
-    width: 1000px;
+    width: 70%;
     text-align: justify;
     display: block;
 }
@@ -13,16 +13,32 @@ h3 {
     border-bottom: 2px solid;
 }
 
+/* Décoration des boutons pour accéder aux liens urls */
+
+a:link, a:visited {
+    background-color: #555;
+    color: white;
+    padding: 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 4px;
+}
+
+a:hover, a:active {
+    background-color: dark;
+}
+
 .main-content {
     background-color: #d4d1d3bb;
     border-radius: 10px;
     border-width: 2px;
     border-style: solid;
     text-align: center;
-    padding: 10px;
-    margin: auto;
+    padding: 5px;
     display: inline-block;
     height: auto;
+    width: 100%;
 }
 
 .adas-content {
@@ -43,28 +59,62 @@ h3 {
 }
 
 .adas-project {
-    width: 20%;
+    width: 25%;
+    padding: 10px;
 }
 
 .adas-sensor {
-    width: 60%;
+    width: 30%;
     display: block;
+    align-items: center;
+    padding: 10px;
 }
 
 .adas-follow-up {
-    width: 20%;
+    padding: 10px;
+    width: 25%;
+}
+
+.sensor-content {
+    margin-left: 6%;
+    text-align: center;
+    width: 100%;
+    display: block;
+}
+
+.bloc-content{
+    margin-top: 10px
 }
 
 .top {
     display: flex;
+    align-items: center;
+    width: 100%;
 }
 
 .frcam, .frrad {
     padding: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    border-style: solid;
+    border-radius: 10px;
+    border-width: 2px;
 }
 
 .bottom {
     display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.siderad, .swadas {
+    padding: 10px;
+    margin-left: 15px;
+    margin-right: 15px;
+    border-style: solid;
+    border-radius: 10px;
+    border-width: 2px;
+    margin-top: 10px;
 }
 
 .option-selection {
@@ -113,8 +163,7 @@ h3 {
 
 .optional-content {
     background-color: #d4d1d3bb;
-    margin-left: 150px;
-    width: 730px;
+    width: 100%;
     padding: 25px;
     border-radius: 10px;
     border-width: 2px;
@@ -122,6 +171,10 @@ h3 {
     min-height: 100px;
     display: flex;
     align-items: center;
+}
+
+.form {
+    margin-left: 10%;
 }
 
 .show {
@@ -147,12 +200,14 @@ h3 {
 
 .form-comments {
     margin-left: 10px;
+    font-size: 15px;
+    resize: none;
 }
 
-.optional-content .btn-submit {
+.btn-submit {
     border-radius: 5px;
     padding: 5px;
-    margin-left: 580px;
+    margin-left: 620px;
     margin-top: 10px;
     background-color: #e0D4cf;
 }
@@ -164,3 +219,30 @@ h3 {
     margin-bottom: 10px;
     display: inline-block;
 }
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 1200px) {
+    .adas-sensor {
+        width: 50%;
+    }
+    .sensor-content {
+        margin-left: 12%;
+    }
+    .adas-content {
+        margin-left: 0%;
+    }
+    .main-content{
+        width: 100%;
+    }
+    .resim-request {
+        width: 80%;
+    }
+    .form {
+        margin-left: 3%;
+    }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+/* @media only screen and (max-width: 1200px) {
+
+} */

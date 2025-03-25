@@ -31,13 +31,13 @@
 }
 
 .expanded {
-    margin-left: 60px; 
+    margin-left: 15px;
     transition: 0.15s;
     transition-timing-function: linear;
 }
   
 .collapsed {
-    margin-left: 140px;
+    margin-left: 130px;
     transition-delay: 0.15s;
     transition-timing-function: linear;
 }

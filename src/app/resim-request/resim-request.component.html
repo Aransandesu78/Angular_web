@@ -4,54 +4,56 @@
         <div class="adas-content">
             <div class="adas-project">
                 <h3>ADAS</h3>
-                <p>{{adas.PlatformVehicule}} {{adas.projectVehicule}} {{adas.ADASDrivingOwner}} {{adas.TypeDriving}}</p>
-                <p>ADAS Requester : {{adas.ADASApplicantOwner}}</p>
+                <p>{{adas.PlatformVehicule}}</p>
+                <p>{{adas.projectVehicule}}</p> 
+                <p>{{adas.ADASDrivingOwner}}</p> 
+                <p>{{adas.TypeDriving}}</p>
+                <p>Requester {{adas.ADASApplicantOwner}}</p>
             </div>
+            <!-- Ajouter les liens URL pour accéder aux sils SDV -->
             <div class="adas-sensor">
                 <h3>Sensors</h3>
-                <div class="top">
-                    <div class="frcam">
-                        <h4>Front Cam</h4>
+                <div class="sensor-content">
+                    <div class="top">
+                        <div class="frcam">
+                            <h4>Front Cam</h4>
+                            <div class="bloc-content">
+                                <p>{{sensor.silSWFrCam}}</p>
+                                <a href="" target="_blank">FrCam</a>
+                            </div>
+                        </div>
+                        <div class="frrad">
+                            <h4>Front Rad</h4>
+                            <div class="bloc-content">
+                                <p>{{sensor.silSWFrRad}}</p>
+                                <a href="" target="_blank">FrRad</a>
+                            </div>
+                        </div>
                     </div>
-                    <div class="frrad">
-                        <h4>Front Rad</h4>
+                    <div class="bottom">
+                        <div class="siderad">
+                            <h4>Side Rad</h4>
+                            <div class="bloc-content">
+                                <p>{{sensor.silSWSideRad}}</p>
+                                <a href="" target="_blank">SideRad</a>
+                            </div>
+                        </div>
+                        <div class="swadas">
+                            <h4>SW ADAS</h4>
+                            <div class="bloc-content">
+                                <p>{{sensor.silSWAdas}}</p>
+                                <a href="" target="_blank">SwAdas</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="bottom">
-                    <div class="siderad">
-                        <h4>Side Rad</h4>
-                    </div>
-                    <div class="swadas">
-                        <h4>SW ADAS</h4>
-                    </div>
-                </div>
-            
-                <!-- <ul>
-                    <li>SW FrCam: {{sensor.silSWFrCam}}</li>
-                    <li>linkSilSWFrCam: {{sensor.linkSilSWFrCam}}</li>
-                    <li>silSWFrRad: {{sensor.silSWFrRad}}</li>
-                    <li>linkSilSWFrRad: {{sensor.linkSilSWFrRad}}</li>
-                    <li>silSWSideRad: {{sensor.silSWSideRad}}</li>
-                    <li>linkSilSWSideRad: {{sensor.linkSilSWSideRad}}</li>
-                    <li>silSWAdas: {{sensor.silSWAdas}}</li>
-                    <li>CalibrationSwAdas: {{sensor.CalibrationSwAdas}}</li>
-                    <li>linkSilSWAdas: {{sensor.linkSilSWAdas}}</li>
-                </ul> -->
             </div>
             <div class="adas-follow-up">
                 <h3>ADAS follow-up</h3>
-                <!-- <ul>
-                    <li>numDDV: {{follow.numDDV}}</li>
-                    <li>dateCreationResimLoopRequest: {{follow.dateCreationResimLoopRequest | date: eu_date_format}}</li>
-                    <li>DatelastModif: {{follow.DatelastModif | date: eu_date_format}}</li>
-                    <li>Dateplanned: {{follow.Dateprevu | date: eu_date_format}}</li>
-                    <li>dateEndResimLoop: {{follow.dateEndResimLoop | date: eu_date_format}}</li>
-                    <li>stateResimLoopStatus: {{follow.stateResimLoopStatus}}</li>
-                    <li>stateADASStatus: {{follow.stateADASStatus}}</li>
-                    <li>dateModifStatusBuckettemp: {{follow.dateModifStatusBuckettemp | date: eu_date_format}}</li>
-                    <li>statusBuckettemp: {{follow.statusBuckettemp}}</li>
-                    <li>associateResimForm: {{follow.associateResimForm}}</li>
-                </ul> -->
+                <p>DDV {{follow.numDDV}}</p>
+                <p>For: {{follow.Dateprevu | date:eu_date_format}}</p>
+                <!-- <p>End : {{follow.dateEndResimLoop | date:eu_date_format}}</p> -->
+                <p>status: {{follow.stateResimLoopStatus}}</p>
             </div>
         </div>
         <button class="option-selection" (click)="toggleDiv()">
@@ -61,16 +63,18 @@
     </div>
     <!-- Creation d'une section commentaires -->
     <div class="optional-content"  [ngClass]="{'show' : isVisible, 'hide' : !isVisible}">
-        <form [formGroup]="formGroup">
-            <div class="resim-comments">
-                <label for="comments" class="form-label">Comments : </label>
-                <textarea id="comments" rows="3" cols="25" type="text" formControlName="resim_comments" class="form-comments"></textarea>
-            </div>
-            <div class="results-comments">
-                <label for="results" class="form-label">Results : </label>
-                <textarea id="results" rows="3" cols="25" type="text" formControlName="results_comments" class="form-comments"></textarea>
-            </div>
-            <button type="submit" class="btn-submit">Submit</button>
-        </form>
+        <div class="form">
+            <form [formGroup]="formGroup">
+                <div class="resim-comments">
+                    <label for="comments" class="form-label">Comments : </label>
+                    <textarea id="comments" rows="5" cols="25" type="text" formControlName="resim_comments" class="form-comments"></textarea>
+                </div>
+                <div class="results-comments">
+                    <label for="results" class="form-label">Results : </label>
+                    <textarea id="results" rows="5" cols="25" type="text" formControlName="results_comments" class="form-comments"></textarea>
+                </div>
+                <button type="submit" class="btn-submit">Submit</button>
+            </form>
+        </div>
     </div>
 </div>

@@ -18,7 +18,7 @@ export class ResimRequestComponent {
   @Input() isAdmin: boolean = false; // Détermine si l'utilisateur est admin 
   statutControl = new FormControl('awaiting'); // Valeur par défaut
 
-  status_request = 'Awaiting'; 
+  status_request = ['Ok', 'NOK']; 
   status: [string, string, string] = ['Awaiting', 'Approved', 'Refused']; // Etats pour les boutons à saisir pour le suivi
   current_date : Date = new Date() // Un exemple pour l'affichage
   eu_date_format: string = 'yyyy/MM/dd'; 
@@ -42,10 +42,10 @@ export class ResimRequestComponent {
     linkSilSWFrCam: "xx",
     silSWFrRad: "SW3.4.0", 
     linkSilSWFrRad: "xx",
-    silSWSideRad: "xx", 
+    silSWSideRad: "SW3.4.0", 
     linkSilSWSideRad: "xx", 
-    silSWAdas: "xx", 
-    CalibrationSwAdas: "xx", 
+    silSWAdas: "SW3.4.0", 
+    CalibrationSwAdas: "SW3.4.0", 
     linkSilSWAdas: "xx",
   }
 
@@ -55,8 +55,8 @@ export class ResimRequestComponent {
     DatelastModif: this.current_date,
     Dateprevu: this.current_date,
     dateEndResimLoop: this.current_date, 
-    stateResimLoopStatus: this.status_request, // Mandatory
-    stateADASStatus: this.status_request, // Mandatory
+    stateResimLoopStatus: this.status_request[0], // Mandatory
+    stateADASStatus: this.status_request[0], // Mandatory
     dateModifStatusBuckettemp: this.current_date, 
     statusBuckettemp: "To validate", // Mandatory
     associateResimForm: "xx",

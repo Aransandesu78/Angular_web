@@ -30,7 +30,7 @@
 
 .main-content {
   display: block;
-  width: 75%;
+  width: 80%;
   margin-left: 5%;
 }
 
@@ -38,7 +38,7 @@
   padding: 10px;
   height: auto;
   bottom: 15px;  
-  margin-left: 95%;
+  margin-left: 90%;
   border-radius: 100%;
   border-color: black;
   color: rgb(0, 0, 0);
