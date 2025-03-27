@@ -220,6 +220,31 @@ a:hover, a:active {
     display: inline-block;
 }
 
+label {
+    font-family: sans-serif;
+    font-size: 1rem;
+    padding-right: 10px;
+}
+
+select {
+    font-size: 0.9rem;
+    padding: 2px 5px;
+    border-radius: 20px;
+}
+
+.status-selection {
+    margin-top: 10px;
+    display: inline-block;
+}
+
+.ok {
+    background-color: greenyellow;
+}
+
+.nok {
+    background-color: rgb(255, 60, 0);
+}
+
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 1200px) {
     .adas-sensor {

@@ -4,28 +4,31 @@ import { SideNavComponent } from "./side-nav/side-nav.component";
 import { MainComponent } from "./main/main.component";
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { CommonModule } from '@angular/common';
+import { ModalFormComponent } from "./modal-form/modal-form.component";
+
 // import { User } from './object';
 
 @Component({
   standalone: true,
   selector: 'app-root',
-  imports: [HeaderComponent, SideNavComponent, MainComponent, FontAwesomeModule],
+  imports: [HeaderComponent, SideNavComponent, MainComponent, FontAwesomeModule, CommonModule, ModalFormComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
   title = 'ADAS Synchro RESIM TOOL';
   faPlus = faPlus;
+  newSidenavLeft! : number;
+  newMainLeft! : number;
+  isSideNavOpen! : boolean;
+  isModalOpen = false; 
   
   // Définition de l'utilisateur
   user_name : string = 'Alain';
   user_last_name : string = 'EENSCHOOTEN';
   user_ipn!: string;
   user_status!: boolean;
-
-  newSidenavLeft! : number;
-  newMainLeft! : number;
-  isSideNavOpen! : boolean;
 
   // myuser = new User(); à mettre pour plus tard
 
@@ -39,5 +42,13 @@ export class AppComponent {
       this.newSidenavLeft = 0;
       this.isSideNavOpen = false;
     }
+  }
+
+  openModal() : void {
+    this.isModalOpen = true;
+  }
+
+  closeModal() : void {
+    this.isModalOpen = false;
   }
 }

@@ -1,24 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <title>Dashboard</title>
-  </head>
-  <div class="container">
-    <div class="header">
-      <app-header [header_title]="title" [user_name]="user_name" [user_lastname]="user_last_name"></app-header>
+<div class="container">
+  <div class="header">
+    <app-header [header_title]="title" [user_name]="user_name" [user_lastname]="user_last_name"></app-header>
+  </div>
+  <div class="main-container">
+    <div class="side-nav" [style.left.px]="newSidenavLeft">
+      <app-side-nav (toggleEvent)="resize($event)"></app-side-nav>
     </div>
-    <div class="main-container">
-      <div class="side-nav" [style.left.px]="newSidenavLeft">
-        <app-side-nav (toggleEvent)="resize($event)"></app-side-nav>
-      </div>
-      <div class="main-content">
-        <app-main [isSideNavOpen]="isSideNavOpen"></app-main>
-        <button class="adas_button">
-          <fa-icon [icon]="faPlus"></fa-icon>
-          <span class="tooltiptext">Add new resim request</span>
-        </button>
-      </div>
+    <div class="main-content">
+      <app-main [isSideNavOpen]="isSideNavOpen"></app-main>
+      <button class="adas_button" (click)="openModal()">
+        <fa-icon [icon]="faPlus"></fa-icon>
+        <span class="tooltiptext">Add new resim request</span>
+      </button>
     </div>
   </div>
-</html>
+  <div *ngIf = "isModalOpen" class="overlay" (click)="closeModal()">
+    <app-modal-form *ngIf="isModalOpen" (close)="closeModal()"></app-modal-form>
+  </div>
+</div>
+

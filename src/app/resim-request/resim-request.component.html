@@ -53,7 +53,14 @@
                 <p>DDV {{follow.numDDV}}</p>
                 <p>For: {{follow.Dateprevu | date:eu_date_format}}</p>
                 <!-- <p>End : {{follow.dateEndResimLoop | date:eu_date_format}}</p> -->
-                <p>status: {{follow.stateResimLoopStatus}}</p>
+                <div class="status-selection"> 
+                    <label for="select-status">Status:</label>
+                    <select name="resim-status" id="select-status" [(ngModel)]="selected_AdasStatus" [ngClass]="get_adas_status()">
+                        <option value="">---ADAS Status---</option>
+                        <option value={{status_request[0]}}>{{status_request[0]}}</option>
+                        <option value={{status_request[1]}}>{{status_request[1]}}</option>
+                    </select>
+                </div>
             </div>
         </div>
         <button class="option-selection" (click)="toggleDiv()">

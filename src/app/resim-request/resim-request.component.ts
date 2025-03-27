@@ -2,12 +2,12 @@ import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Adas, Sensors, Follow, Comments } from '../object';
 
 @Component({
   selector: 'app-resim-request',
-  imports: [FontAwesomeModule, CommonModule, ReactiveFormsModule],
+  imports: [FontAwesomeModule, CommonModule, ReactiveFormsModule, FormsModule],
   templateUrl: './resim-request.component.html',
   styleUrl: './resim-request.component.css'
 })
@@ -18,10 +18,12 @@ export class ResimRequestComponent {
   @Input() isAdmin: boolean = false; // Détermine si l'utilisateur est admin 
   statutControl = new FormControl('awaiting'); // Valeur par défaut
 
-  status_request = ['Ok', 'NOK']; 
+  status_request = ['OK', 'NOK']; 
   status: [string, string, string] = ['Awaiting', 'Approved', 'Refused']; // Etats pour les boutons à saisir pour le suivi
   current_date : Date = new Date() // Un exemple pour l'affichage
   eu_date_format: string = 'yyyy/MM/dd'; 
+
+  selected_AdasStatus!: string; 
 
   formGroup = new FormGroup({
     resim_comments : new FormControl(''),
@@ -64,8 +66,21 @@ export class ResimRequestComponent {
 
   comment!: Comments;
 
-  toggleDiv() {
+  toggleDiv() : void {
     this.isVisible = !this.isVisible;
+  }
+
+  // On récupère la valeur saisie dans le menu déroulé
+  get_adas_status() : string {
+    if (this.selected_AdasStatus === 'OK'){
+      return 'ok';
+    }
+    else if (this.selected_AdasStatus === 'NOK'){
+      return 'nok';
+    }
+    else {
+      return '';
+    }
   }
 
 }

@@ -15,7 +15,7 @@
 }
 
 .side-nav {
-  width: auto;
+  width: 11%;
   height: 100%;
   margin-top: 80px;
   left: 0;
@@ -40,10 +40,10 @@
   bottom: 15px;  
   margin-left: 90%;
   border-radius: 100%;
-  border-color: black;
-  color: rgb(0, 0, 0);
+  border-color: white;
+  color: white;
   font: Arial, Helvetica, sans-serif;
-  background-color:  #e0D4cf;
+  background-color:  black;
   position: fixed;
 }
 
@@ -78,6 +78,16 @@
   margin-left: -60px;
   opacity: 0;
   transition: opacity 0.3s;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 10;
 }
 
 /* Responsive layout - when the screen is less than 700px wide, make the two columns stack on top of each other instead of next to each other */
