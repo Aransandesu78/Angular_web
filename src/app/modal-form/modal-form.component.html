@@ -1,1 +1,92 @@
-
+<!-- Mise en place du formulaire -->
+<div class="form">
+    <div class="top">
+        <div class="header">
+            <h2>Resim Request form</h2>
+        </div>
+        <button class="close-btn" (click)="closeModal()">
+            <fa-icon [icon]="faXmark"></fa-icon>
+        </button>
+    </div>
+    <div class="adas-resim">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <!-- Sélection de la resim ADAS -->
+            <div class="adas-resim">
+                <h4>ADAS Resim</h4>
+                <br>
+                <label for="platformvehicule">PlatformVehicule</label>
+                <select name="platform" id="platform-selected" formControlName="PlatformVehicule">
+                    <option *ngFor="let platform of adas.PlatformVehicule" [value]="platform">{{platform}}</option>
+                </select>
+                <br>
+                <label for="projectvehicule">projectVehicule</label>
+                <select name="project" id="project-selected" formControlName="projectVehicule">
+                    <option *ngFor="let project of adas.projectVehicule" [value]="project">{{project}}</option>
+                </select>
+                <br>
+                <label for="drivingowner">AdasDrivingOwner</label>
+                <select name="AdasDrivingOwner" id="drivingowner-selected" formControlName="ADASDrivingOwner">
+                    <option *ngFor="let drivingowner of adas.ADASDrivingOwner" [value]="drivingowner">{{drivingowner}}</option>
+                </select>
+                <br>
+                <label for="typedriving">typedriving</label>
+                <select name="typedriving" id="typedriving-selected" formControlName="TypeDriving">
+                    <option *ngFor="let type of adas.TypeDriving" [value]="type">{{type}}</option>
+                </select>
+                <br>
+                <label for="applicantowner">AdasApplicantOwner</label>
+                <select name="AdasApplicantOwner" id="AdasApplicantOwner-selected" formControlName="ADASApplicantOwner">
+                    <option *ngFor="let Applicantowner of adas.ADASApplicantOwner" [value]="Applicantowner">{{Applicantowner}}</option>
+                </select>
+            </div>
+            <!-- Saisie des versions de SILs et URLs -->
+            <div class="sil-adas">
+                <h4>SIL ADAS</h4>
+                <br>
+                <label for="front-camera">silSWFrCam</label>
+                <input id="frcam" type="text" class="input" formControlName="silSWFrCam">
+                <br>
+                <label for="link-frcam">linkSilSWFrCam</label>
+                <input id="link-frcam" type="text" class="input" formControlName="linkSilSWFrCam">
+                <br>
+                <label for="front-radar">silSWFrRad</label>
+                <input id="frrad" type="text" class="input" formControlName="silSWFrRad">
+                <br>
+                <label for="link-frrad">linkSilSWFrRad</label>
+                <input id="link-frrad" type="text" class="input" formControlName="linkSilSWFrRad">
+                <br>
+                <label for="side-radar">silSWSideRad</label>
+                <input id="siderad" type="text" class="input" formControlName="silSWSideRad">
+                <br>
+                <label for="link-siderad">linkSilSWSideRad</label>
+                <input id="link-siderad" type="text" class="input" formControlName="linkSilSWSideRad">
+                <br>
+                <label for="sw-adas">silSWAdas</label>
+                <input id="swadas" type="text" class="input" formControlName="silSWAdas">
+                <br>
+                <label for="url-sw-adas">linkSilSWAdas</label>
+                <input id="url-swadas" type="text" class="input" formControlName="linkSilSWAdas">
+                <br>
+                <br>
+                <!-- Création d'une section commentaires -->
+                <label for="adas-comments">Comments</label>
+                <br>
+                <textarea id="comments" rows="5" cols="25" type="text" formControlName="Comments" class="form-comments"></textarea>
+            </div>
+            <div class="resim-details">
+                <h4>Resim Details</h4>
+                <br>
+                <label for="num-DDV">n°DDV</label>
+                <input id="num" type="text" class="input" formControlName="numDDV">
+                <br>
+                <label for="status">stateADASStatus</label>
+                <input id="adas-status" type="text" class="input" formControlName="stateADASStatus">
+                <br>
+                <label for="url-associate-resim-form">associateResimForm</label>
+                <input id="url-form" type="text" class="input" formControlName="associateResimForm">
+                <br>
+            </div>
+            <button class="submit-btn">Submit</button>
+        </form>
+    </div>
+</div>

@@ -4,11 +4,11 @@
         <div class="adas-content">
             <div class="adas-project">
                 <h3>ADAS</h3>
-                <p>{{adas.PlatformVehicule}}</p>
+                <!-- <p>{{adas.PlatformVehicule}}</p>
                 <p>{{adas.projectVehicule}}</p> 
                 <p>{{adas.ADASDrivingOwner}}</p> 
                 <p>{{adas.TypeDriving}}</p>
-                <p>Requester {{adas.ADASApplicantOwner}}</p>
+                <p>Requester {{adas.ADASApplicantOwner}}</p> -->
             </div>
             <!-- Ajouter les liens URL pour accéder aux sils SDV -->
             <div class="adas-sensor">
@@ -51,14 +51,12 @@
             <div class="adas-follow-up">
                 <h3>ADAS follow-up</h3>
                 <p>DDV {{follow.numDDV}}</p>
-                <p>For: {{follow.Dateprevu | date:eu_date_format}}</p>
+                <p>For : {{follow.Dateprevu | date:eu_date_format}}</p>
                 <!-- <p>End : {{follow.dateEndResimLoop | date:eu_date_format}}</p> -->
                 <div class="status-selection"> 
                     <label for="select-status">Status:</label>
                     <select name="resim-status" id="select-status" [(ngModel)]="selected_AdasStatus" [ngClass]="get_adas_status()">
-                        <option value="">---ADAS Status---</option>
-                        <option value={{status_request[0]}}>{{status_request[0]}}</option>
-                        <option value={{status_request[1]}}>{{status_request[1]}}</option>
+                        <option *ngFor="let index of follow.stateADASStatus" [value]="index">{{index}}</option>
                     </select>
                 </div>
             </div>

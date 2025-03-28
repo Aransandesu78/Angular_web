@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -12,17 +12,25 @@ import { Adas, Sensors, Follow, Comments } from '../object';
   styleUrl: './resim-request.component.css'
 })
 export class ResimRequestComponent {
+  // Déclaration des objets importés du fichier object.ts
+  adas: Adas;
+  sensor: Sensors;
+  follow: Follow;
+  comments: Comments;
+
+  // Initialisation des objets dans le constructeur
+  constructor(){
+    this.adas = new Adas();
+    this.sensor = new Sensors();
+    this.follow = new Follow();
+    this.comments = new Comments(); 
+  }
+
   faCaretDown = faCaretDown;
   isVisible: boolean = false; 
-
   @Input() isAdmin: boolean = false; // Détermine si l'utilisateur est admin 
   statutControl = new FormControl('awaiting'); // Valeur par défaut
-
-  status_request = ['OK', 'NOK']; 
-  status: [string, string, string] = ['Awaiting', 'Approved', 'Refused']; // Etats pour les boutons à saisir pour le suivi
-  current_date : Date = new Date() // Un exemple pour l'affichage
   eu_date_format: string = 'yyyy/MM/dd'; 
-
   selected_AdasStatus!: string; 
 
   formGroup = new FormGroup({
@@ -30,41 +38,6 @@ export class ResimRequestComponent {
     results_comments : new FormControl(''), 
   });
 
-  // Créer les objets du composant ici 
-  adas : Adas = {
-    PlatformVehicule : "Sweet500",
-    projectVehicule : "BCB",
-    ADASDrivingOwner : "AEB",
-    TypeDriving : "Certif",
-    ADASApplicantOwner : "AEB",
-  } 
-
-  sensor : Sensors = {
-    silSWFrCam: "SW5.4.0",
-    linkSilSWFrCam: "xx",
-    silSWFrRad: "SW3.4.0", 
-    linkSilSWFrRad: "xx",
-    silSWSideRad: "SW3.4.0", 
-    linkSilSWSideRad: "xx", 
-    silSWAdas: "SW3.4.0", 
-    CalibrationSwAdas: "SW3.4.0", 
-    linkSilSWAdas: "xx",
-  }
-
-  follow : Follow = {
-    numDDV: "208.28", // Mandatory
-    dateCreationResimLoopRequest: this.current_date, // Mandatory
-    DatelastModif: this.current_date,
-    Dateprevu: this.current_date,
-    dateEndResimLoop: this.current_date, 
-    stateResimLoopStatus: this.status_request[0], // Mandatory
-    stateADASStatus: this.status_request[0], // Mandatory
-    dateModifStatusBuckettemp: this.current_date, 
-    statusBuckettemp: "To validate", // Mandatory
-    associateResimForm: "xx",
-  }
-
-  comment!: Comments;
 
   toggleDiv() : void {
     this.isVisible = !this.isVisible;
