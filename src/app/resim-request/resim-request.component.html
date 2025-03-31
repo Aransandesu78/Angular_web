@@ -69,7 +69,7 @@
     <!-- Creation d'une section commentaires -->
     <div class="optional-content"  [ngClass]="{'show' : isVisible, 'hide' : !isVisible}">
         <div class="form">
-            <form [formGroup]="formGroup">
+            <form [formGroup]="formGroup" (ngSubmit)="Submit()">
                 <div class="resim-comments">
                     <label for="comments" class="form-label">Comments : </label>
                     <textarea id="comments" rows="5" cols="25" type="text" formControlName="resim_comments" class="form-comments"></textarea>

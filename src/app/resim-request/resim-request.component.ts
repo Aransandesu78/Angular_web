@@ -38,7 +38,6 @@ export class ResimRequestComponent {
     results_comments : new FormControl(''), 
   });
 
-
   toggleDiv() : void {
     this.isVisible = !this.isVisible;
   }
@@ -54,6 +53,12 @@ export class ResimRequestComponent {
     else {
       return '';
     }
+  }
+
+  // Soumission du formulaire
+  Submit() {
+    const formData = this.formGroup.value;
+    return formData;
   }
 
 }

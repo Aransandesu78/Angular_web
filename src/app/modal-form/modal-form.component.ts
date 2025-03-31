@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { Adas, Sensors, Follow, Comments } from '../object';
@@ -39,11 +39,11 @@ export class ModalFormComponent implements OnInit {
   // Initialisation pour la récupération du formulaire
   private initForm(): void {
     this.form = new FormGroup({
-      PlatformVehicule: new FormControl<string | null>(''),
-      projectVehicule : new FormControl<string | null>(''),
-      ADASDrivingOwner: new FormControl<string | null>(''),
-      TypeDriving: new FormControl<string | null>(''),
-      ADASApplicantOwner: new FormControl<string | null>(''),
+      PlatformVehicule: new FormControl<string | null>('', [Validators.required]),
+      projectVehicule : new FormControl<string | null>('', [Validators.required]),
+      ADASDrivingOwner: new FormControl<string | null>('', [Validators.required]),
+      TypeDriving: new FormControl<string | null>('', [Validators.required]),
+      ADASApplicantOwner: new FormControl<string | null>('', [Validators.required]),
   
       silSWFrCam: new FormControl<string | null>(''),
       linkSilSWFrCam: new FormControl<string | null>(''),
@@ -64,11 +64,12 @@ export class ModalFormComponent implements OnInit {
   // Soumission du formulaire
   onSubmit() {
     const formData = this.form.value;
+    console.log(formData);
     return formData;
   }
 
   // Fermeture du modal
-  closeModal(){
+  closeModal() : void {
     this.close.emit();
   }
 }

@@ -49,6 +49,7 @@ export class Follow {
 
     constructor(){
         this.dateCreationResimLoopRequest = new Date();
+        console.log(this.dateCreationResimLoopRequest);
     }
 }
 
