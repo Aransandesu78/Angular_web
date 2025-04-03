@@ -45,19 +45,18 @@ export class ModalFormComponent implements OnInit {
       TypeDriving: new FormControl<string | null>('', [Validators.required]),
       ADASApplicantOwner: new FormControl<string | null>('', [Validators.required]),
   
-      silSWFrCam: new FormControl<string | null>(''),
-      linkSilSWFrCam: new FormControl<string | null>(''),
-      silSWFrRad: new FormControl<string | null>(''),
-      linkSilSWFrRad: new FormControl<string | null>(''),
-      silSWSideRad: new FormControl<string | null>(''),
-      linkSilSWSideRad: new FormControl<string | null>(''),
-      silSWAdas: new FormControl<string | null>(''),
-      linkSilSWAdas: new FormControl<string | null>(''),
+      silSWFrCam: new FormControl<string | null>('', Validators.pattern(/^[A-Z._0-9]{3,9}$/)),
+      linkSilSWFrCam: new FormControl<string | null>('', Validators.pattern(/^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([\/\w .-]*)*\/?$/)),
+      silSWFrRad: new FormControl<string | null>('',  Validators.pattern(/^[A-Z._0-9]{3,9}$/)),
+      linkSilSWFrRad: new FormControl<string | null>('', Validators.pattern(/^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([\/\w .-]*)*\/?$/)),
+      silSWSideRad: new FormControl<string | null>('',  Validators.pattern(/^[A-Z._0-9]{3,9}$/)),
+      silSWAdas: new FormControl<string | null>('', Validators.pattern(/^[A-Z._0-9]{3,9}$/)),
+      linkSilSWAdas: new FormControl<string | null>('', Validators.pattern(/^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([\/\w .-]*)*\/?$/)),
       Comments: new FormControl<string | null>(''),
   
-      numDDV: new FormControl<string | null>(''),
+      numDDV: new FormControl<string | null>('', Validators.pattern(/^[0-9]+(\.[0-9]+)?$/)),
       stateADASStatus: new FormControl<string | null>(''),
-      associateResimForm: new FormControl<string | null>(''),
+      associateResimForm: new FormControl<string | null>('', Validators.pattern(/^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([\/\w .-]*)*\/?$/)),
     });
   }
 

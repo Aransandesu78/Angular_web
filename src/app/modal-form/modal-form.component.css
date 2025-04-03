@@ -6,7 +6,7 @@
     height: 80%;
     border-radius: 10px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    width: 1000px;
+    width: 50%;
     position: relative; 
     overflow-y: auto;
 }
@@ -54,4 +54,10 @@ select {
     background-color: bisque;
     border-radius: 20px;
     margin-left: 50%;
+}
+
+.element {
+    display: flex;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
