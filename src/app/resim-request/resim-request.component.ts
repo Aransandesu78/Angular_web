@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -58,6 +58,7 @@ export class ResimRequestComponent {
   // Soumission du formulaire
   Submit() {
     const formData = this.formGroup.value;
+    console.log(formData);
     return formData;
   }
 

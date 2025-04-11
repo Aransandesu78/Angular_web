@@ -4,11 +4,7 @@
         <div class="adas-content">
             <div class="adas-project">
                 <h3>ADAS</h3>
-                <!-- <p>{{adas.PlatformVehicule}}</p>
-                <p>{{adas.projectVehicule}}</p> 
-                <p>{{adas.ADASDrivingOwner}}</p> 
-                <p>{{adas.TypeDriving}}</p>
-                <p>Requester {{adas.ADASApplicantOwner}}</p> -->
+                <p>adas works !</p>
             </div>
             <!-- Ajouter les liens URL pour accéder aux sils SDV -->
             <div class="adas-sensor">
@@ -67,16 +63,16 @@
         </button> 
     </div>
     <!-- Creation d'une section commentaires -->
-    <div class="optional-content"  [ngClass]="{'show' : isVisible, 'hide' : !isVisible}">
+    <div class="optional-content" [ngClass]="{'show' : isVisible, 'hide' : !isVisible}">
         <div class="form">
             <form [formGroup]="formGroup" (ngSubmit)="Submit()">
                 <div class="resim-comments">
-                    <label for="comments" class="form-label">Comments : </label>
-                    <textarea id="comments" rows="5" cols="25" type="text" formControlName="resim_comments" class="form-comments"></textarea>
+                    <label for="comments" class="form-label">Comments</label>
+                    <textarea id="comments" rows="2" cols="25" type="text" formControlName="resim_comments" class="form-comments"></textarea>
                 </div>
                 <div class="results-comments">
-                    <label for="results" class="form-label">Results : </label>
-                    <textarea id="results" rows="5" cols="25" type="text" formControlName="results_comments" class="form-comments"></textarea>
+                    <label for="results" class="form-label">Results</label>
+                    <textarea [readOnly]="" id="results" rows="2" cols="25" type="text" formControlName="results_comments" class="form-comments"></textarea>
                 </div>
                 <button type="submit" class="btn-submit">Submit</button>
             </form>

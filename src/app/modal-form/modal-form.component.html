@@ -1,5 +1,5 @@
 <!-- Mise en place du formulaire -->
-<div class="form">
+<div class="form" *ngIf="isready">
     <div class="top">
         <div class="header">
             <h2>Resim Request form</h2>
@@ -8,120 +8,173 @@
             <fa-icon [icon]="faXmark"></fa-icon>
         </button>
     </div>
-    <div class="adas-resim">
+    <div class="adas-resim-content">
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
             <!-- Sélection de la resim ADAS -->
             <div class="adas-resim">
                 <h4>ADAS Resim</h4>
                 <br>
+                <!-- class element agencé en block -->
                 <div class="element">
-                    <div class="label">
-                        <label for="platformvehicule">PlatformVehicule</label>
-                        <br>
-                        <label for="projectvehicule">projectVehicule</label>
-                        <br>
-                        <label for="drivingowner">AdasDrivingOwner</label>
-                        <br>
-                        <label for="typedriving">typedriving</label>
-                        <br>
-                        <label for="applicantowner">AdasApplicantOwner</label>
-                    </div>
-                    <div class="options">
-                        <select name="platform" id="platform-selected" formControlName="PlatformVehicule">
+                    <!-- class content agencé en flex -->
+                    <div class="content" *ngIf="adas?.PlatformVehicule?.length">
+                        <label name="Platformvehicule">PlatformVehicule *</label>
+                        <select name="PlatformVehicule" id="PlatformVehicule-selected" formControlName="PlatformVehicule">
                             <option *ngFor="let platform of adas.PlatformVehicule" [value]="platform">{{platform}}</option>
                         </select>
-                        <br>
-                        <select name="project" id="project-selected" formControlName="projectVehicule">
-                            <option *ngFor="let project of adas.projectVehicule" [value]="project">{{project}}</option>
+                        <div class="text-danger" *ngIf="form.controls['PlatformVehicule'].invalid && (form.controls['PlatformVehicule'].touched || form.controls['PlatformVehicule'].dirty)">
+                            <span *ngIf="form.controls['PlatformVehicule'].errors?.['required']">This is required !</span>
+                        </div>
+                    </div>
+                    <div class="content" *ngIf="adas?.projectVehicule?.length">
+                        <label for="projectVehicule">projectVehicule *</label>
+                        <select name="projectVehicule" id="projectVehicule-selected" formControlName="projectVehicule">
+                            <option *ngFor="let platform of adas.projectVehicule" [value]="platform">{{platform}}</option>
                         </select>
-                        <br>
-                        <select name="AdasDrivingOwner" id="drivingowner-selected" formControlName="ADASDrivingOwner">
-                            <option *ngFor="let drivingowner of adas.ADASDrivingOwner" [value]="drivingowner">{{drivingowner}}</option>
+                        <div class="text-danger" *ngIf="form.controls['projectVehicule'].invalid && (form.controls['projectVehicule'].touched || form.controls['projectVehicule'].dirty)">
+                            <span *ngIf="form.controls['projectVehicule'].errors?.['required']">This is required !</span>
+                        </div>
+                    </div>
+                    <div class="content" *ngIf="adas?.ADASDrivingOwner?.length">
+                        <label for="ADASDrivingOwner">ADASDrivingOwner *</label>
+                        <select name="ADASDrivingOwner" id="ADASDrivingOwner-selected" formControlName="ADASDrivingOwner">
+                            <option *ngFor="let platform of adas.ADASDrivingOwner" [value]="platform">{{platform}}</option>
                         </select>
-                        <br>
-                        <select name="typedriving" id="typedriving-selected" formControlName="TypeDriving">
-                            <option *ngFor="let type of adas.TypeDriving" [value]="type">{{type}}</option>
+                        <div class="text-danger" *ngIf="form.controls['ADASDrivingOwner'].invalid && (form.controls['ADASDrivingOwner'].touched || form.controls['ADASDrivingOwner'].dirty)">
+                            <span *ngIf="form.controls['ADASDrivingOwner'].errors?.['required']">This is required !</span>
+                        </div>
+                    </div>
+                    <div class="content" *ngIf="adas?.TypeDriving?.length">
+                        <label for="TypeDriving">TypeDriving *</label>
+                        <select name="TypeDriving" id="TypeDriving-selected" formControlName="TypeDriving">
+                            <option *ngFor="let platform of adas.TypeDriving" [value]="platform">{{platform}}</option>
                         </select>
-                        <br>
-                        <select name="AdasApplicantOwner" id="AdasApplicantOwner-selected" formControlName="ADASApplicantOwner">
-                            <option *ngFor="let Applicantowner of adas.ADASApplicantOwner" [value]="Applicantowner">{{Applicantowner}}</option>
+                        <div class="text-danger" *ngIf="form.controls['TypeDriving'].invalid && (form.controls['TypeDriving'].touched || form.controls['TypeDriving'].dirty)">
+                            <span *ngIf="form.controls['TypeDriving'].errors?.['required']">This is required !</span>
+                        </div>
+                    </div>
+                    <div class="content" *ngIf="adas?.ADASApplicantOwner?.length">
+                        <label for="ADASApplicantOwner">ADASApplicantOwner *</label>
+                        <select name="ADASApplicantOwner" id="ADASApplicantOwner-selected" formControlName="ADASApplicantOwner">
+                            <option *ngFor="let platform of adas.ADASApplicantOwner" [value]="platform">{{platform}}</option>
                         </select>
-                        <br>
-                        <!-- @if (control.invalid && (control.dirty || control.touched)) {
-                            @if (control.hasError('required')) {
-                              <div>Le champ est obligatoire.</div>
-                            }
-                        } -->
-                    </div>  
-                </div> 
+                        <div class="text-danger" *ngIf="form.controls['ADASApplicantOwner'].invalid && (form.controls['ADASApplicantOwner'].touched || form.controls['ADASApplicantOwner'].dirty)">
+                            <span *ngIf="form.controls['ADASApplicantOwner'].errors?.['required']">This is required !</span>
+                        </div>
+                    </div>
+                </div>
             </div>
             <!-- Saisie des versions de SILs et URLs -->
             <div class="sil-adas">
                 <h4>SIL ADAS</h4>
                 <br>
                 <div class="element">
-                    <div class="label">
-                        <label for="front-camera">silSWFrCam</label>
-                        <br>
-                        <label for="link-frcam">linkSilSWFrCam</label>
-                        <br>
-                        <label for="front-radar">silSWFrRad</label>
-                        <br>
-                        <label for="link-frrad">linkSilSWFrRad</label>
-                        <br>
-                        <label for="side-radar">silSWSideRad</label>
-                        <br>
-                        <label for="link-siderad">linkSilSWSideRad</label>
-                        <br>
-                        <label for="sw-adas">silSWAdas</label>
-                        <br>
-                        <label for="url-sw-adas">linkSilSWAdas</label>
-                        <br>
-                        <br>
-                        <label for="adas-comments">Comments</label>
+                    <div class="frcam">
+                        <div class="sil">
+                            <label for="front-camera">silSWFrCam</label>
+                            <input id="frcam" type="text" class="input" formControlName="silSWFrCam">
+                        </div>
+                        <div class="text-danger" *ngIf="form.controls['silSWFrCam'].invalid">
+                            <span *ngIf="form.controls['silSWFrCam'].errors?.['pattern']">
+                                Invalid format : 3 to 9 characters capital, digits, dot or underscores !
+                            </span>
+                        </div>
+                        <div class="link">
+                            <label for="link-frcam">linkSilSWFrCam</label>
+                            <input id="link-frcam" type="text" class="input" formControlName="linkSilSWFrCam">
+                        </div>
+                        <div class="text-danger" *ngIf="form.controls['linkSilSWFrCam'].invalid">
+                            <span *ngIf="form.controls['linkSilSWFrCam'].errors?.['pattern']">
+                                invalid URL !
+                            </span>
+                        </div>
                     </div>
-                    <div class="input">
-                        <input id="frcam" type="text" class="input" formControlName="silSWFrCam">
-                        <br>
-                        <input id="link-frcam" type="text" class="input" formControlName="linkSilSWFrCam">
-                        <br>
-                        <input id="frrad" type="text" class="input" formControlName="silSWFrRad">
-                        <br>
-                        <input id="link-frrad" type="text" class="input" formControlName="linkSilSWFrRad">
-                        <br>
-                        <input id="siderad" type="text" class="input" formControlName="silSWSideRad">
-                        <br>
-                        <input id="link-siderad" type="text" class="input" formControlName="linkSilSWSideRad">
-                        <br>
-                        <input id="swadas" type="text" class="input" formControlName="silSWAdas">
-                        <br>
-                        <input id="url-swadas" type="text" class="input" formControlName="linkSilSWAdas">
-                        <br>
+                    <div class="frrad">
+                        <div class="sil">
+                            <label for="front-radar">silSWFrRad</label>
+                            <input id="frrad" type="text" class="input" formControlName="silSWFrRad">
+                        </div>
+                        <div class="text-danger" *ngIf="form.controls['silSWFrRad'].invalid">
+                            <span *ngIf="form.controls['silSWFrRad'].errors?.['pattern']">
+                                Invalid format : 3 to 9 characters capital, digits, dot or underscores !
+                            </span>
+                        </div>
+                        <div class="link">
+                            <label for="link-frrad">linkSilSWFrRad</label>
+                            <input id="link-frrad" type="text" class="input" formControlName="linkSilSWFrRad">
+                        </div>
+                        <div class="text-danger" *ngIf="form.controls['linkSilSWFrRad'].invalid">
+                            <span *ngIf="form.controls['linkSilSWFrRad'].errors?.['pattern']">
+                                invalid URL !
+                            </span>
+                        </div>
+                    </div>    
+                    <div class="siderad">
+                        <div class="sil">
+                            <label for="side-radar">silSWSideRad</label>
+                            <input id="siderad" type="text" class="input" formControlName="silSWSideRad">
+                        </div>
+                        <div class="text-danger" *ngIf="form.controls['silSWSideRad'].invalid">
+                            <span *ngIf="form.controls['silSWSideRad'].errors?.['pattern']">
+                                Invalid format : 3 to 9 characters capital, digits, dot or underscores !
+                            </span>
+                        </div>
+                        <div class="link">
+                            <label for="link-siderad">linkSilSWSideRad</label>
+                            <input id="link-siderad" type="text" class="input" formControlName="linkSilSWSideRad">
+                        </div> 
+                        <div class="text-danger" *ngIf="form.controls['linkSilSWSideRad'].invalid">
+                            <span *ngIf="form.controls['linkSilSWSideRad'].errors?.['pattern']">
+                                invalid URL !
+                            </span>
+                        </div>
+                    </div>
+                    <div class="swadas">
+                        <div class="sil">
+                            <label for="sw-adas">silSWAdas</label>
+                            <input id="swadas" type="text" class="input" formControlName="silSWAdas">
+                        </div>
+                        <div class="text-danger" *ngIf="form.controls['silSWAdas'].invalid">
+                            <span *ngIf="form.controls['silSWAdas'].errors?.['pattern']">
+                                Invalid format : 3 to 9 characters capital, digits, dot or underscores !
+                            </span>
+                        </div>
+                        <div class="link">
+                            <label for="url-sw-adas">linkSilSWAdas</label>
+                            <input id="url-swadas" type="text" class="input" formControlName="linkSilSWAdas">
+                        </div>
+                        <div class="text-danger" *ngIf="form.controls['linkSilSWAdas'].invalid">
+                            <span *ngIf="form.controls['linkSilSWAdas'].errors?.['pattern']">
+                                invalid URL !
+                            </span>
+                        </div>
                     </div>
                 </div>
-                 <!-- Création d'une section commentaires -->
-                 <textarea id="comments" rows="5" cols="25" type="text" formControlName="Comments" class="form-comments"></textarea>
+                <!-- Création d'une section commentaires -->
+                <label for="Comments">Comments</label>
+                <textarea id="comments" rows="5" cols="25" type="text" formControlName="Comments"></textarea>
             </div>
             <div class="resim-details">
                 <h4>Resim Details</h4>
-                <br>
                 <div class="element">
-                    <div class="label">
+                    <div class="ddv">
                         <label for="num-DDV">n°DDV</label>
-                        <br>
-                        <label for="status">stateADASStatus</label>
-                        <br>
-                        <label for="url-associate-resim-form">associateResimForm</label>
-                    </div>
-                    <div class="input">
                         <input id="num" type="text" class="input" formControlName="numDDV">
-                        <br>
-                        <select name="stateADASStatus" id="stateADASStatus-selected" formControlName="stateADASStatus">
-                            <option *ngFor="let state of follow.stateADASStatus" [value]="follow.stateADASStatus">{{state}}</option>
-                        </select>
-                        <br>
-                        <input id="url-form" type="text" class="input" formControlName="associateResimForm">
                     </div>
+                    <div class="status">
+                        <label for="status">stateADASStatus</label>
+                        <select name="stateADASStatus" id="stateADASStatus-selected" formControlName="stateADASStatus">
+                            <option *ngFor="let state of follow.stateADASStatus" [value]="state">{{state}}</option>
+                        </select>
+                    </div>
+                    <!-- Modifier si ce n'est pas nécessaire -->
+                    <div class="text-danger" *ngIf="form.controls['stateADASStatus'].invalid && (form.controls['stateADASStatus'].touched || form.controls['stateADASStatus'].dirty)">
+                        <span *ngIf="form.controls['stateADASStatus'].errors?.['required']">This is required !</span>
+                    </div>
+                   <div class="resim-form">
+                        <label for="url-form">associateResimForm</label>
+                        <input id="url-form" type="text" class="input" formControlName="associateResimForm">
+                   </div>
                 </div>
             </div>
             <button class="submit-btn">Submit</button>

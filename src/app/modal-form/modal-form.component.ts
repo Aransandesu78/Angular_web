@@ -4,6 +4,7 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { Adas, Sensors, Follow, Comments } from '../object';
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-modal-form',
@@ -17,26 +18,37 @@ export class ModalFormComponent implements OnInit {
   faXmark = faXmark;
 
   // Déclaration des objets importés du fichier object.ts
-  adas: Adas;
-  sensor: Sensors;
-  follow: Follow;
-  comments: Comments;
+  adas!: Adas;
+  sensor!: Sensors;
+  follow!: Follow;
+  comments!: Comments;
   form!: FormGroup;
+  adas_tables!: string[][];
+  adas_key : string[] = ["PlatformVehicule", "projectVehicule", 
+    "ADASDrivingOwner", "TypeDriving", "ADASApplicantOwner"];
+  isready: boolean = false;
 
   // Initialisation des objets dans le constructeur
-  constructor(){
+  constructor(private cdRef: ChangeDetectorRef){
     this.adas = new Adas();
     this.sensor = new Sensors();
     this.follow = new Follow();
     this.comments = new Comments(); 
+    this.adas_tables = [this.adas.PlatformVehicule, this.adas.projectVehicule, 
+      this.adas.ADASDrivingOwner, this.adas.TypeDriving, this.adas.ADASApplicantOwner];
   }
 
   // Initialisation du composant dès sa création
   ngOnInit(): void {
     this.initForm();
+    console.log("ADAS PlatformVehicule :", this.adas.PlatformVehicule);
+    // Détecter manuellement les changements
+    this.cdRef.detectChanges();
+    this.isready = true; 
   }
   
   // Initialisation pour la récupération du formulaire
+  // On configure les entrées de chaque attribut
   private initForm(): void {
     this.form = new FormGroup({
       PlatformVehicule: new FormControl<string | null>('', [Validators.required]),
@@ -45,26 +57,34 @@ export class ModalFormComponent implements OnInit {
       TypeDriving: new FormControl<string | null>('', [Validators.required]),
       ADASApplicantOwner: new FormControl<string | null>('', [Validators.required]),
   
-      silSWFrCam: new FormControl<string | null>('', Validators.pattern(/^[A-Z._0-9]{3,9}$/)),
-      linkSilSWFrCam: new FormControl<string | null>('', Validators.pattern(/^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([\/\w .-]*)*\/?$/)),
-      silSWFrRad: new FormControl<string | null>('',  Validators.pattern(/^[A-Z._0-9]{3,9}$/)),
-      linkSilSWFrRad: new FormControl<string | null>('', Validators.pattern(/^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([\/\w .-]*)*\/?$/)),
-      silSWSideRad: new FormControl<string | null>('',  Validators.pattern(/^[A-Z._0-9]{3,9}$/)),
-      silSWAdas: new FormControl<string | null>('', Validators.pattern(/^[A-Z._0-9]{3,9}$/)),
-      linkSilSWAdas: new FormControl<string | null>('', Validators.pattern(/^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([\/\w .-]*)*\/?$/)),
+      silSWFrCam: new FormControl<string | null>('', [Validators.pattern(/^[A-Z._0-9]{3,9}$/)]),
+      linkSilSWFrCam: new FormControl<string | null>('', [Validators.pattern(/^(https?:\/\/)[^\s$.?#].[^\s]*$/)]),
+      silSWFrRad: new FormControl<string | null>('',  [Validators.pattern(/^[A-Z._0-9]{3,9}$/)]),
+      linkSilSWFrRad: new FormControl<string | null>('', [Validators.pattern(/^(https?:\/\/)[^\s$.?#].[^\s]*$/)]),
+      silSWSideRad: new FormControl<string | null>('',  [Validators.pattern(/^[A-Z._0-9]{3,9}$/)]),
+      linkSilSWSideRad: new FormControl<string | null>('', [Validators.pattern(/^(https?:\/\/)[^\s$.?#].[^\s]*$/)]),
+      silSWAdas: new FormControl<string | null>('', [Validators.pattern(/^[A-Z._0-9]{3,9}$/)]),
+      linkSilSWAdas: new FormControl<string | null>('', [Validators.pattern(/^(https?:\/\/)[^\s$.?#].[^\s]*$/)]),
       Comments: new FormControl<string | null>(''),
   
-      numDDV: new FormControl<string | null>('', Validators.pattern(/^[0-9]+(\.[0-9]+)?$/)),
-      stateADASStatus: new FormControl<string | null>(''),
-      associateResimForm: new FormControl<string | null>('', Validators.pattern(/^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([\/\w .-]*)*\/?$/)),
+      numDDV: new FormControl<string | null>('', [Validators.pattern(/^[0-9]+(\.[0-9]+)?$/)]),
+      stateADASStatus: new FormControl<string | null>('', [Validators.required]),
+      associateResimForm: new FormControl<string | null>('', [Validators.pattern(/^(https?:\/\/)[^\s$.?#].[^\s]*$/)]),
     });
   }
 
   // Soumission du formulaire
   onSubmit() {
-    const formData = this.form.value;
-    console.log(formData);
-    return formData;
+    if (this.form.invalid) {
+      this.form.markAllAsTouched(); // Marque que tous les champs sont "touchés pour affiner les erreurs"
+      return;
+    }
+    
+    else{
+      const formData = this.form.value;
+      console.log(formData);
+      return formData;
+    }
   }
 
   // Fermeture du modal

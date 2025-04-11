@@ -174,7 +174,8 @@ a:hover, a:active {
 }
 
 .form {
-    margin-left: 10%;
+    width: 100%;
+    display: block;
 }
 
 .show {
@@ -190,8 +191,21 @@ a:hover, a:active {
 }
 
 .resim-comments, .results-comments {
-    padding: 5px;
-    display: inline-flex;
+    width: 100%;
+    margin-bottom: 25px;
+}
+
+textarea {
+    font-size: large;
+    width: 100%;
+    height: 100px;
+    padding: 12px 20px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    font-size: 30px;
+    resize: none;
 }
 
 .form-label {
@@ -205,11 +219,14 @@ a:hover, a:active {
 }
 
 .btn-submit {
-    border-radius: 5px;
-    padding: 5px;
-    margin-left: 620px;
-    margin-top: 10px;
-    background-color: #e0D4cf;
+    padding: 8px 16px;
+    background-color: black;
+    color: white;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    margin-left: 45%;
+    margin-top: 20px;
 }
 
 .status-container {

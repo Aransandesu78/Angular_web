@@ -16,11 +16,11 @@ export class User {
 }
 
 export class Adas {
-    PlatformVehicule: string[] = ['--None--', 'SWEET111', 'SWEET200', 'SWEET400', 'SWEET420'];
-    projectVehicule: string[] = ['--None--', 'XFK', 'HHN', 'HCB'];
-    ADASDrivingOwner: string[] = ['--None--', 'AEB', 'LSS', 'ISA', 'ACC'];
-    TypeDriving: string[] = ['--None--', 'FEAS', 'DEV', 'CERTIF', 'SMP'];
-    ADASApplicantOwner: string[] = ['--None--', 'AEB', 'LSS', 'ISA', 'ACC'];
+    PlatformVehicule: string[] = ['SWEET111', 'SWEET200', 'SWEET400', 'SWEET420'];
+    projectVehicule: string[] = ['XFK', 'HHN', 'HCB'];
+    ADASDrivingOwner: string[] = ['AEB', 'LSS', 'ISA', 'ACC'];
+    TypeDriving: string[] = ['FEAS', 'DEV', 'CERTIF', 'SMP'];
+    ADASApplicantOwner: string[] = ['AEB', 'LSS', 'ISA', 'ACC'];
 }
 
 export class Sensors {
