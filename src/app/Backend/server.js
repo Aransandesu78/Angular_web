@@ -7,14 +7,15 @@ const app = express();
 
 // Création du port d'écoute 
 const PORT = 3080;
+const route = '/api/request/';
 
 // Initialisation 
 app.use(cors());
 app.use(bodyParser.json());
 
 /* Création des requêtes SQL à envoyer à la base de données */
-// Récupère les données au serveur
-app.get('/api/request', (req, res) => {
+// Récupère toutes les données au serveur
+app.get(route, (req, res) => {
   db.query('SELECT * FROM request', (err, results) => {
     if (err) return res.status(500).json({ error: err.message });
     res.json(results);
@@ -22,7 +23,7 @@ app.get('/api/request', (req, res) => {
 });
 
 // Envoie les données au serveur
-app.post('/api/request/', (req, res) => {
+app.post(route, (req, res) => {
 
   /* Déclaration des variables à utiliser pour les requêtes SQL */
   const {
@@ -73,11 +74,11 @@ app.post('/api/request/', (req, res) => {
 
   db.query(sql, values, (err, results) => {
     if (err) return res.status(500).json({ error: err.message });
-    res.json({ message: 'Request ajoutée avec succès', id: result.insertId });
+    res.json({ message: 'Request successfully sent', id: result.insertId });
   });
 });
 
 // Ecoute le port 3080 du serveur pour se connecter
 app.listen(PORT, () => {
-  console.log(`Serveur en écoute sur http://localhost:${PORT}`);
+  console.log(`Server listened on http://localhost:${PORT}${route}`);
 });

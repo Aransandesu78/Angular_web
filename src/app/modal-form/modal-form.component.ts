@@ -4,7 +4,7 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { Adas, Sensors, Follow, Comments } from '../object';
-import { ChangeDetectorRef } from '@angular/core';
+import { RequestService } from '../services/request.service';
 
 @Component({
   selector: 'app-modal-form',
@@ -26,10 +26,9 @@ export class ModalFormComponent implements OnInit {
   adas_tables!: string[][];
   adas_key : string[] = ["PlatformVehicule", "projectVehicule", 
     "ADASDrivingOwner", "TypeDriving", "ADASApplicantOwner"];
-  isready: boolean = false;
 
   // Initialisation des objets dans le constructeur
-  constructor(private cdRef: ChangeDetectorRef){
+  constructor(private requestService : RequestService){
     this.adas = new Adas();
     this.sensor = new Sensors();
     this.follow = new Follow();
@@ -42,9 +41,6 @@ export class ModalFormComponent implements OnInit {
   ngOnInit(): void {
     this.initForm();
     console.log("ADAS PlatformVehicule :", this.adas.PlatformVehicule);
-    // Détecter manuellement les changements
-    this.cdRef.detectChanges();
-    this.isready = true; 
   }
   
   // Initialisation pour la récupération du formulaire
@@ -79,11 +75,10 @@ export class ModalFormComponent implements OnInit {
       this.form.markAllAsTouched(); // Marque que tous les champs sont "touchés pour affiner les erreurs"
       return;
     }
-    
-    else{
+    else {
       const formData = this.form.value;
+      this.requestService.addRequest(formData);
       console.log(formData);
-      return formData;
     }
   }
 
