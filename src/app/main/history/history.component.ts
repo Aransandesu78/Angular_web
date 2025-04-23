@@ -4,25 +4,33 @@ import { RouterModule } from '@angular/router';
 import { ResimRequestComponent } from '../../resim-request/resim-request.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faFilter } from '@fortawesome/free-solid-svg-icons';
-import { RequestService } from '../../services/request.service';
-import { OnInit } from '@angular/core';
+import { FilterComponent } from './filter/filter.component';
 
 @Component({
   selector: 'app-history',
-  imports: [CommonModule, RouterModule, ResimRequestComponent, FontAwesomeModule],
+  imports: [CommonModule, RouterModule, ResimRequestComponent, FontAwesomeModule, FilterComponent],
   templateUrl: './history.component.html',
   styleUrl: './history.component.css'
 })
-export class HistoryComponent implements OnInit {
+export class HistoryComponent {
   faFilter = faFilter;
+  isModalOpen !: boolean;
 
   // Initialise le constructeur par création d'une instance d'un service
-  constructor(private requestService : RequestService) {}
+  // constructor(private requestService : RequestService) {}
 
   // On initialise le composant en récupérant les données depuis la BDD
-  ngOnInit(): void {
-    this.requestService.getRequests().subscribe((data) => {
-      console.log('Requests reçues:', data);
-    });
+  // ngOnInit(): void {
+  //   this.requestService.getRequests().subscribe((data) => {
+  //     console.log('Requests reçues:', data);
+  //   });
+  // }
+
+  openModal() : void {
+    this.isModalOpen = true;
+  }
+
+  closeModal() : void {
+    this.isModalOpen = false;
   }
 }

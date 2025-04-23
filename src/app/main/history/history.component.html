@@ -1,6 +1,6 @@
 <div class="history-header">
     <h1>History Board</h1>
-    <button class="adas-filter">
+    <button class="adas-filter" (click)="openModal()">
         <span>ADAS </span>
         <fa-icon [icon]="faFilter"></fa-icon>
     </button>
@@ -10,4 +10,7 @@
     <h2>Resim Request</h2>
     <!-- Uniquement pour visualiser -->
     <app-resim-request></app-resim-request>
+</div>
+<div *ngIf="isModalOpen" class="filter-overlay">
+    <app-filter *ngIf="isModalOpen" (close)="closeModal()"></app-filter>
 </div>

@@ -28,7 +28,7 @@ export class ModalFormComponent implements OnInit {
     "ADASDrivingOwner", "TypeDriving", "ADASApplicantOwner"];
 
   // Initialisation des objets dans le constructeur
-  constructor(private requestService : RequestService){
+  constructor(){
     this.adas = new Adas();
     this.sensor = new Sensors();
     this.follow = new Follow();
@@ -77,7 +77,7 @@ export class ModalFormComponent implements OnInit {
     }
     else {
       const formData = this.form.value;
-      this.requestService.addRequest(formData);
+      // this.requestService.addRequest(formData);
       console.log(formData);
     }
   }
