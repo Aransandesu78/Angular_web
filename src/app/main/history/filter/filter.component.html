@@ -1,0 +1,14 @@
+<!-- Formulaire pour le filtrage des résultats -->
+<div class="form">
+    <div class="top">
+        <div class="header">
+            <h2>Resim Request Filter</h2>
+        </div>
+        <button class="close-btn" (click)="closeModal()">
+            <fa-icon [icon]="faXmark"></fa-icon>
+        </button>
+    </div>
+</div>
+<div class="filter-content">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()"></form>
+</div>
