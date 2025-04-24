@@ -10,6 +10,7 @@
     <h2>Resim Request</h2>
     <!-- Uniquement pour visualiser -->
     <app-resim-request></app-resim-request>
+    <mat-paginator [length]="totalItems" [pageSize]="pageSize" [pageIndex]="currentPage" (page)="pageChanged($event)"></mat-paginator>
 </div>
 <div *ngIf="isModalOpen" class="filter-overlay">
     <app-filter *ngIf="isModalOpen" (close)="closeModal()"></app-filter>

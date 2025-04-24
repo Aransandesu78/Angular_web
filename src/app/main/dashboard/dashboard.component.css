@@ -7,3 +7,23 @@
 .header-title .adas-title {
     margin-top: 10px;
 }
+
+.main {
+    display: block;
+    margin-top: 50px;
+}
+
+.finished, .ongoing, .awaiting {
+    padding: 10px;
+    display: block;
+    border: 1px solid black;
+    border-radius: 15px;
+    margin-bottom: 40px;
+    width: 100%;
+    height: auto;
+} 
+
+.content {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}

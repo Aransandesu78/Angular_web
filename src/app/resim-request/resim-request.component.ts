@@ -29,7 +29,6 @@ export class ResimRequestComponent {
   faCaretDown = faCaretDown;
   isVisible: boolean = false; 
   @Input() isAdmin: boolean = false; // Détermine si l'utilisateur est admin 
-  statutControl = new FormControl('awaiting'); // Valeur par défaut
   eu_date_format: string = 'yyyy/MM/dd'; 
   selected_AdasStatus!: string; 
 
@@ -38,6 +37,7 @@ export class ResimRequestComponent {
     results_comments : new FormControl(''), 
   });
 
+  // Ouverture fermeture de la section commentaires
   toggleDiv() : void {
     this.isVisible = !this.isVisible;
   }
@@ -55,7 +55,7 @@ export class ResimRequestComponent {
     }
   }
 
-  // Soumission du formulaire
+  // Soumission des commentaires 
   Submit() {
     const formData = this.formGroup.value;
     console.log(formData);
