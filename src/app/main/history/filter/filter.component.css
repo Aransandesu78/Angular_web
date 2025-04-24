@@ -3,11 +3,11 @@
     color: black;
     padding: 20px;
     margin: auto;
-    margin-top: 5%;
-    height: 80%;
+    margin-top: 2%;
+    height: 85%;
     border-radius: 10px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    width: 60%;
+    width: 45%;
     overflow: auto;
     position: relative;
     z-index: 500;
@@ -51,3 +51,86 @@ h2 {
     display: flex;
     flex-direction: column;
 }
+
+.adas-resim, .resim-details {
+    padding: 10px;
+    display: block;
+    border: 1px solid black;
+    border-radius: 15px;
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+.element {
+    display: flex;
+}
+
+.container {
+    display: block;
+    margin-right: 30px;
+}
+
+.content {
+    width: 100%;
+    margin: 5px 0;
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+select {
+    border-radius: 5px;
+    padding: 8px 10px;
+    width: 100%;
+    position: relative;
+    z-index: auto !important;
+    background-color: white;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    margin-top: 5px;
+}
+
+option {
+    z-index: 10000;
+    display: block !important;
+}
+
+.input {
+    border-radius: 4px;
+    font-size: 1rem;
+    padding: 12px 20px;
+    box-sizing: border-box;
+    width: 100%;
+    border: 1px solid #ccc;
+    margin-top: 10px;
+    margin-bottom: 7px;
+}
+
+.submit-btn {
+    padding: 8px 16px;
+    background-color: black;
+    color: white;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    margin-left: 45%;
+    display: block;
+    margin-top: 20px;
+}
+
+@media screen and (max-width: 768px) {
+    .form {
+        width: 95%;
+        padding: 15px;
+    }
+
+    .submit-btn {
+        margin-left: 0;
+        width: 100%;
+    }
+}
+

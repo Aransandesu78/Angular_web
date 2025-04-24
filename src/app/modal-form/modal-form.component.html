@@ -162,14 +162,14 @@
                         <input id="num" type="text" class="input" formControlName="numDDV">
                     </div>
                     <div class="status">
-                        <label for="status">stateADASStatus</label>
-                        <select name="stateADASStatus" id="stateADASStatus-selected" formControlName="stateADASStatus">
-                            <option *ngFor="let state of follow.stateADASStatus" [value]="state">{{state}}</option>
+                        <label for="status">stateResimLoopStatus</label>
+                        <select name="stateResimLoopStatus" id="stateResimLoopStatus-selected" formControlName="stateResimLoopStatus">
+                            <option *ngFor="let state of follow.stateResimLoopStatus" [value]="state">{{state}}</option>
                         </select>
                     </div>
                     <!-- Modifier si ce n'est pas nécessaire -->
-                    <div class="text-danger" *ngIf="form.controls['stateADASStatus'].invalid && (form.controls['stateADASStatus'].touched || form.controls['stateADASStatus'].dirty)">
-                        <span *ngIf="form.controls['stateADASStatus'].errors?.['required']">This is required !</span>
+                    <div class="text-danger" *ngIf="form.controls['stateResimLoopStatus'].invalid && (form.controls['stateResimLoopStatus'].touched || form.controls['stateResimLoopStatus'].dirty)">
+                        <span *ngIf="form.controls['stateResimLoopStatus'].errors?.['required']">This is required !</span>
                     </div>
                    <div class="resim-form">
                         <label for="url-form">associateResimForm</label>

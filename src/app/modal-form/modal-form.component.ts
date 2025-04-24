@@ -64,7 +64,7 @@ export class ModalFormComponent implements OnInit {
       Comments: new FormControl<string | null>(''),
   
       numDDV: new FormControl<string | null>('', [Validators.pattern(/^[0-9]+(\.[0-9]+)?$/)]),
-      stateADASStatus: new FormControl<string | null>('', [Validators.required]),
+      stateResimLoopStatus: new FormControl<string | null>('', [Validators.required]),
       associateResimForm: new FormControl<string | null>('', [Validators.pattern(/^(https?:\/\/)[^\s$.?#].[^\s]*$/)]),
     });
   }

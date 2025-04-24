@@ -8,7 +8,70 @@
             <fa-icon [icon]="faXmark"></fa-icon>
         </button>
     </div>
-</div>
-<div class="filter-content">
-    <form [formGroup]="form" (ngSubmit)="onSubmit()"></form>
+    <div class="filter-content">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="adas-resim">
+                <h4>ADAS Resim</h4>
+                <br>
+                <div class="element">
+                    <div class="container">
+                        <div class="content" *ngIf="adas?.PlatformVehicule?.length">
+                            <label name="Platformvehicule">PlatformVehicule</label>
+                            <select name="PlatformVehicule" id="PlatformVehicule-selected" formControlName="PlatformVehicule">
+                                <option *ngFor="let platform of adas.PlatformVehicule" [value]="platform">{{platform}}</option>
+                            </select>
+                        </div>
+                        <div class="content" *ngIf="adas?.projectVehicule?.length">
+                            <label for="projectVehicule">projectVehicule</label>
+                            <select name="projectVehicule" id="projectVehicule-selected" formControlName="projectVehicule">
+                                <option *ngFor="let platform of adas.projectVehicule" [value]="platform">{{platform}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="container">
+                        <div class="content" *ngIf="adas?.ADASDrivingOwner?.length">
+                            <label for="ADASDrivingOwner">ADASDrivingOwner</label>
+                            <select name="ADASDrivingOwner" id="ADASDrivingOwner-selected" formControlName="ADASDrivingOwner">
+                                <option *ngFor="let platform of adas.ADASDrivingOwner" [value]="platform">{{platform}}</option>
+                            </select>
+                        </div>
+                        <div class="content" *ngIf="adas?.TypeDriving?.length">
+                            <label for="TypeDriving">TypeDriving</label>
+                            <select name="TypeDriving" id="TypeDriving-selected" formControlName="TypeDriving">
+                                <option *ngFor="let platform of adas.TypeDriving" [value]="platform">{{platform}}</option>
+                            </select>  
+                        </div>
+                    </div>
+                    <div class="container">
+                        <div class="content" *ngIf="adas?.ADASApplicantOwner?.length">
+                            <label for="ADASApplicantOwner">ADASApplicantOwner</label>
+                            <select name="ADASApplicantOwner" id="ADASApplicantOwner-selected" formControlName="ADASApplicantOwner">
+                                <option *ngFor="let platform of adas.ADASApplicantOwner" [value]="platform">{{platform}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="resim-details">
+                <h4>Resim Details</h4>
+                <br>
+                <div class="element">
+                    <div class="container">
+                        <div class="content">
+                            <label for="num-DDV">n°DDV</label>
+                            <input id="num" type="text" class="input" formControlName="numDDV">
+                        </div>
+                        <div class="content">
+                            <label for="status">stateResimLoopStatus</label>
+                            <select name="stateResimLoopStatus" id="stateResimLoopStatus-selected" formControlName="stateResimLoopStatus">
+                                <option *ngFor="let state of follow.stateResimLoopStatus" [value]="state">{{state}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="submit-btn">Submit</button>
+        </form>
+    </div>
 </div>
