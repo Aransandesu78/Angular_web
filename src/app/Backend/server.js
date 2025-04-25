@@ -1,17 +1,11 @@
 /* Importation des modules */
 const express = require('express');
-const bodyParser = require('body-parser');
-const cors = require('cors');
 const db = require('./db'); // import la connexion avec la base de données
 const app = express();
 
 // Création du port d'écoute 
 const PORT = 3080;
 const route = '/api/request/';
-
-// Initialisation 
-app.use(cors());
-app.use(bodyParser.json());
 
 /* Création des requêtes SQL à envoyer à la base de données */
 // Récupère toutes les données au serveur

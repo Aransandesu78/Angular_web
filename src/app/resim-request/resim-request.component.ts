@@ -4,7 +4,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Adas, Sensors, Follow, Comments } from '../object';
-
+import { RequestModel } from '../request.model';
+import { GetRequestService } from '../Backend/get_request/get_request.service'
 @Component({
   selector: 'app-resim-request',
   imports: [FontAwesomeModule, CommonModule, ReactiveFormsModule, FormsModule],
@@ -12,6 +13,9 @@ import { Adas, Sensors, Follow, Comments } from '../object';
   styleUrl: './resim-request.component.css'
 })
 export class ResimRequestComponent {
+  @Input() isAdmin: boolean = false; // Détermine si l'utilisateur est admin 
+  @Input() request!: RequestModel;
+
   // Déclaration des objets importés du fichier object.ts
   adas: Adas;
   sensor: Sensors;
@@ -19,7 +23,7 @@ export class ResimRequestComponent {
   comments: Comments;
 
   // Initialisation des objets dans le constructeur
-  constructor(){
+  constructor() {
     this.adas = new Adas();
     this.sensor = new Sensors();
     this.follow = new Follow();
@@ -28,7 +32,6 @@ export class ResimRequestComponent {
 
   faCaretDown = faCaretDown;
   isVisible: boolean = false; 
-  @Input() isAdmin: boolean = false; // Détermine si l'utilisateur est admin 
   eu_date_format: string = 'yyyy/MM/dd'; 
   selected_AdasStatus!: string; 
 

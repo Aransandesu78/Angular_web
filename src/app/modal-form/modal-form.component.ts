@@ -4,7 +4,7 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { Adas, Sensors, Follow, Comments } from '../object';
-import { RequestService } from '../Backend/services/request.service';
+import { GetRequestService } from '../Backend/get_request/get_request.service';
 
 @Component({
   selector: 'app-modal-form',
