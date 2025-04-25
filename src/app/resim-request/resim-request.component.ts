@@ -5,7 +5,7 @@ import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Adas, Sensors, Follow, Comments } from '../object';
 import { RequestModel } from '../request.model';
-import { GetRequestService } from '../Backend/get_request/get_request.service'
+
 @Component({
   selector: 'app-resim-request',
   imports: [FontAwesomeModule, CommonModule, ReactiveFormsModule, FormsModule],

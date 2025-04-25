@@ -7,6 +7,7 @@ import { faFilter } from '@fortawesome/free-solid-svg-icons';
 import { FilterComponent } from './filter/filter.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { GetRequestService } from '../../Backend/get_request/get_request.service';
+import { RequestModel } from '../../request.model';
 
 @Component({
   selector: 'app-history',
@@ -21,17 +22,16 @@ export class HistoryComponent implements OnInit {
   isModalOpen !: boolean;
   items = []; // tes données
   paginatedItems = [];
-
-  requestsList: any[] = [];
+  requestsList: RequestModel[] = [];
 
   constructor (private getRequestService : GetRequestService) {}
 
   ngOnInit(): void {
     this.getRequestService.getRequests().subscribe(data => {
       this.requestsList = data;
+      console.log(this.requestsList);
     });
   }
-  
 
   // Initialise le constructeur par création d'une instance d'un service
   // constructor(private requestService : RequestService) {}

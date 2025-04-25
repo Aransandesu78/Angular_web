@@ -9,7 +9,7 @@
 <div class="content">
     <h2>Resim Request</h2>
     <!-- Uniquement pour visualiser -->
-    <app-resim-request *ngFor="let request of requestsList" [request]="requestsList"></app-resim-request>
+    <app-resim-request *ngFor="let request of requestsList" [request]="request"></app-resim-request>
     <!-- <mat-paginator [length]="totalItems" [pageSize]="pageSize" [pageIndex]="currentPage" (page)="pageChanged($event)"></mat-paginator> -->
 </div>
 <div *ngIf="isModalOpen" class="filter-overlay">
