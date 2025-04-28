@@ -4,11 +4,11 @@
         <div class="adas-content">
             <div class="adas-project">
                 <h3>ADAS</h3>
-                <p>{{adas.ADASApplicantOwner}}</p>
-                <p>{{adas.ADASDrivingOwner}}</p>
-                <p>{{adas.PlatformVehicule}}</p>
-                <p>{{adas.TypeDriving}}</p>
-                <p>{{adas.projectVehicule}}</p>
+                <p>ApplicantOwner : {{request.ADASApplicantOwner}}</p>
+                <p>DrivingOwner : {{request.ADASDrivingOwner}}</p>
+                <p>{{request.PlatformVehicule}}</p>
+                <p>{{request.TypeDriving}}</p>
+                <p>{{request.projectVehicule}}</p>
             </div>
             <!-- Ajouter les liens URL pour accéder aux sils SDV -->
             <div class="adas-sensor">
@@ -50,8 +50,8 @@
             </div>
             <div class="adas-follow-up">
                 <h3>ADAS follow-up</h3>
-                <p>DDV {{follow.numDDV}}</p>
-                <p>For : {{follow.Dateprevu | date:eu_date_format}}</p>
+                <p>NumDDV : {{request.num_DDV}}</p>
+                <p>For : {{request.dateEndResimLoop | date:eu_date_format}}</p>
                 <!-- <p>End : {{follow.dateEndResimLoop | date:eu_date_format}}</p> -->
                 <div class="status-selection"> 
                     <label for="select-status">Status:</label>
