@@ -72,11 +72,11 @@
             <form [formGroup]="formGroup" (ngSubmit)="Submit()">
                 <div class="resim-comments">
                     <label for="comments" class="form-label">Comments</label>
-                    <textarea id="comments" rows="2" cols="25" type="text" formControlName="resim_comments" class="form-comments"></textarea>
+                    <textarea id="comments" rows="1" cols="20" type="text" formControlName="resim_comments" class="form-comments"></textarea>
                 </div>
                 <div class="results-comments">
                     <label for="results" class="form-label">Results</label>
-                    <textarea [readOnly]="" id="results" rows="2" cols="25" type="text" formControlName="results_comments" class="form-comments"></textarea>
+                    <textarea [readOnly]="" id="results" rows="1" cols="20" type="text" formControlName="results_comments" class="form-comments"></textarea>
                 </div>
                 <button type="submit" class="btn-submit">Submit</button>
             </form>

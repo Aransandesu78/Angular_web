@@ -4,7 +4,6 @@ import { HistoryComponent } from './main/history/history.component';
 import { StatisticsComponent } from './main/statistics/statistics.component';
 import { InformationComponent } from './main/information/information.component';
 import { LogoutComponent } from './main/logout/logout.component';
-import { SettingsComponent } from './main/settings/settings.component';
 import { UserComponent } from './header/user/user.component';
 import { BucketComponent } from './header/bucket/bucket.component';
 
@@ -38,11 +37,6 @@ export const routes: Routes = [
         path : 'logout',
         component : LogoutComponent,
         title : 'logout'
-    },
-    {
-        path : 'settings',
-        component : SettingsComponent,
-        title : 'settings'
     },
     {
         path : 'user',

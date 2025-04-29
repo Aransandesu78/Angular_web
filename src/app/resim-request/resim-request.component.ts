@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, Input, EventEmitter, Output } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -15,6 +15,7 @@ import { RequestModel } from '../request.model';
 export class ResimRequestComponent {
   @Input() isAdmin: boolean = false; // Détermine si l'utilisateur est admin 
   @Input() request!: RequestModel;
+  @Output() SwitchEvent = new EventEmitter<boolean>();
 
   // Déclaration des objets importés du fichier object.ts
   adas: Adas;
@@ -43,6 +44,7 @@ export class ResimRequestComponent {
   // Ouverture fermeture de la section commentaires
   toggleDiv() : void {
     this.isVisible = !this.isVisible;
+    this.SwitchEvent.emit(this.isVisible);
   }
 
   // On récupère la valeur saisie dans le menu déroulé

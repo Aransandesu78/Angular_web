@@ -19,7 +19,7 @@ export class SideNavComponent {
   faCaretRight = faCaretRight;
 
   isSidebarCollapsed = false;
-  @Output() toggleEvent = new EventEmitter<boolean>()
+  @Output() toggleEvent = new EventEmitter<boolean>();
 
   onSidebarToggle() : void {
     this.isSidebarCollapsed = !this.isSidebarCollapsed;

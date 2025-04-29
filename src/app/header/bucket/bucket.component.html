@@ -1,1 +1,19 @@
-<p>bucket works!</p>
+<div class="Bucket Temp">
+    <div class="header">
+        <h1>Request Bucket Temp</h1>
+        <button class="filter">
+            <span>Request Filter </span>
+            <fa-icon [icon]="faFilter"></fa-icon>
+        </button>
+    </div>
+    <br>
+    <div class="content">
+        <div class="title">
+            <h2>Resim Requests awaiting</h2>
+        </div>
+        <app-resim-request *ngFor="let request of requestsList" [request]="request"></app-resim-request>
+    </div>
+</div>
+<div *ngIf="isModalOpen" class="filter-overlay">
+    <app-filter *ngIf="isModalOpen" (close)="closeModal()"></app-filter>
+</div>

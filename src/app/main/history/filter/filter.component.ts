@@ -15,6 +15,7 @@ import { Adas, Sensors, Follow, Comments } from '../../../object';
 export class FilterComponent {
   // Création événement pour la fermeture de la fenêtre
   @Output() close = new EventEmitter<void>();
+  
   faXmark = faXmark;
   adas!: Adas;
   sensor!: Sensors;

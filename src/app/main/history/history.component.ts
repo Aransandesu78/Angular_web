@@ -19,10 +19,12 @@ import { RequestModel } from '../../request.model';
 })
 export class HistoryComponent implements OnInit {
   faFilter = faFilter;
-  isModalOpen !: boolean;
-  items = []; // tes données
+  isModalOpen!: boolean;
+  items = []; 
   paginatedItems = [];
   requestsList: RequestModel[] = [];
+  newMarginbottom!: number;
+  isVisible: boolean = false;
 
   constructor (private getRequestService : GetRequestService) {}
 
@@ -58,6 +60,17 @@ export class HistoryComponent implements OnInit {
   //   this.currentPage = event.pageIndex;
   // }
 
+  // Redimensionner le composant en fonction de l'affichage de la div comments
+  resize(val: boolean) : void {
+    if (val === true) {
+      this.newMarginbottom = -120;
+      this.isVisible = true;  
+    }
+    else {
+      this.newMarginbottom = 0;
+      this.isVisible = false;
+    }
+  }
   
   openModal() : void {
     this.isModalOpen = true;

@@ -24,7 +24,7 @@ export class AppComponent {
   isSideNavOpen! : boolean;
   isModalOpen = false; 
   
-  // Définition de l'utilisateur
+  // Définition de l'utilisateur à modifier en créant un objet à partir du fichier object.ts
   user_name : string = 'Alain';
   user_last_name : string = 'EENSCHOOTEN';
   user_ipn!: string;
@@ -44,10 +44,12 @@ export class AppComponent {
     }
   }
 
+  // Ouverture de la fenêtre modale
   openModal() : void {
     this.isModalOpen = true;
   }
 
+  // Fermeture de la fenêtre modale
   closeModal() : void {
     this.isModalOpen = false;
   }
