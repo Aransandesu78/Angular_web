@@ -1,4 +1,8 @@
+/** Création d'une interface pour faciliter l'exportation 
+* de l'objet Resim Request avec un typage fort **/
+
 export interface RequestModel {
+  id: number;
   PlatformVehicule: string;
   projectVehicule: string;
   ADASDrivingOwner: string;
