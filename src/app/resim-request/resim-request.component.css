@@ -265,6 +265,26 @@ select {
     background-color: rgb(255, 60, 0);
 }
 
+.request-action {
+    margin-top: 10px;
+}
+
+.modify {
+    padding: 8px;
+    color: white;
+    margin-right: 10px;
+    background-color: rgb(206, 106, 12);
+    border-color: white;
+}
+
+.delete {
+    padding: 8px;
+    color: white;
+    margin-right: 10px;
+    background-color: rgb(170, 45, 45);
+    border-color: white;
+}
+
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 1200px) {
     .adas-sensor {

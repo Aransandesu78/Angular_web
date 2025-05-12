@@ -58,6 +58,14 @@
                     <select name="resim-status" id="select-status" [(ngModel)]="selected_AdasStatus" [ngClass]="get_adas_status()">
                         <option *ngFor="let index of follow.stateADASStatus" [value]="index">{{index}}</option>
                     </select>
+                    <div class="request-action">
+                        <button class="modify">
+                            <p>modify</p>
+                        </button>
+                        <button class="delete">
+                            <p>delete</p>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>

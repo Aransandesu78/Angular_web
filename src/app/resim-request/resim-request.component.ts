@@ -5,6 +5,10 @@ import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Adas, Sensors, Follow, Comments } from '../object';
 import { RequestModel } from '../request.model';
+import { PutRequestService } from '../Backend/put_request/put-request.service';
+import { DeleteRequestService } from '../Backend/delete_request/delete-request.service';
+import { GetRequestService } from '../Backend/get_request/get_request.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-resim-request',
@@ -24,7 +28,7 @@ export class ResimRequestComponent {
   comments: Comments;
 
   // Initialisation des objets dans le constructeur
-  constructor() {
+  constructor(private putRequestService: PutRequestService, private deleteRequestService: DeleteRequestService, private getRequestService: GetRequestService) {
     this.adas = new Adas();
     this.sensor = new Sensors();
     this.follow = new Follow();
@@ -67,4 +71,13 @@ export class ResimRequestComponent {
     return formData;
   }
 
+  // Modifier la demande resim formulée 
+  modifyRequest(request: RequestModel){
+    this.putRequestService.updateRequest(request);
+  }
+
+  // Supprimer une demande resim formulée
+  deleteRequestByID(request: RequestModel): void {
+    this.deleteRequestService.deleteRequest(request.id);
+  }
 }

@@ -20,9 +20,18 @@ db.connect(err => {
   console.log('Connecté à la base de données MySQL');
 });
 
-// Route exemple pour récupérer des données
+// Route pour récupérer toutes les demandes resims
 app.get('/api/requests', (req, res) => {
   db.query('SELECT * FROM request', (err, results) => {
+    if (err) return res.status(500).send(err);
+    res.json(results);
+  });
+});
+
+// Route pour récupérer les demandes resims en fonction de l'ID
+app.get('/api/requests/:id', (req, res) => {
+  const requestId = req.params.id;
+  db.query(`SELECT * FROM request WHERE id = ${requestId}`, (err, results) => {
     if (err) return res.status(500).send(err);
     res.json(results);
   });
