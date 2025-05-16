@@ -41,7 +41,7 @@ export class FilterComponent {
   })
 
   // Fermeture du modal
-  closeModal() : void {
+  closethismodal() : void {
     this.close.emit();
   }
 
