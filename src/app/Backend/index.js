@@ -37,6 +37,18 @@ app.get('/api/requests/:id', (req, res) => {
   });
 });
 
+// Modifier une demande resim selon l'id récupéré
+app.put('api/requests/:id', (req, res) => {
+  const requestId = req.params.id;
+  const updatedData = req.body;
+  const sql = `UPDATE request SET ? WHERE id = ?`;
+  db.query(sql, [updatedData, requestId], (err, result) => {
+    if (err) return res.status(500).send(err);
+    res.json({ message: 'Demande mise à jour avec succès', result });
+  });
+});
+
+
 app.listen(3000, () => {
   console.log('Serveur backend démarré sur le port 3000');
 });
