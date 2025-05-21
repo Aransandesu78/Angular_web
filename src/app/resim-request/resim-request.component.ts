@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, EventEmitter, Output } from '@angular/core';
+import { Component, Input, EventEmitter, Output, inject } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -8,7 +8,6 @@ import { RequestModel } from '../request.model';
 import { PutRequestService } from '../Backend/put_request/put-request.service';
 import { DeleteRequestService } from '../Backend/delete_request/delete-request.service';
 import { GetRequestService } from '../Backend/get_request/get_request.service';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-resim-request',
@@ -21,29 +20,34 @@ export class ResimRequestComponent {
   @Input() request!: RequestModel;
   @Output() SwitchEvent = new EventEmitter<boolean>();
 
+  // Importation des services 
+  putRequestService = inject(PutRequestService);
+  deleteRequestService = inject(DeleteRequestService); 
+  getRequestService = inject(GetRequestService);
+
   // Déclaration des objets importés du fichier object.ts
   adas: Adas;
   sensor: Sensors;
   follow: Follow;
   comments: Comments;
+  formGroup = new FormGroup({
+    resim_comments : new FormControl(''),
+    results_comments : new FormControl(''), 
+  });
 
-  // Initialisation des objets dans le constructeur
-  constructor(private putRequestService: PutRequestService, private deleteRequestService: DeleteRequestService, private getRequestService: GetRequestService) {
-    this.adas = new Adas();
-    this.sensor = new Sensors();
-    this.follow = new Follow();
-    this.comments = new Comments(); 
-  }
-
+  // Déclaration des attributs
   faCaretDown = faCaretDown;
   isVisible: boolean = false; 
   eu_date_format: string = 'yyyy/MM/dd'; 
   selected_AdasStatus!: string; 
 
-  formGroup = new FormGroup({
-    resim_comments : new FormControl(''),
-    results_comments : new FormControl(''), 
-  });
+  // Initialisation des objets dans le constructeur
+  constructor() {
+    this.adas = new Adas();
+    this.sensor = new Sensors();
+    this.follow = new Follow();
+    this.comments = new Comments(); 
+  }
 
   // Ouverture fermeture de la section commentaires
   toggleDiv() : void {
@@ -73,7 +77,7 @@ export class ResimRequestComponent {
 
   // Modifier la demande resim formulée 
   modifyRequest(request: RequestModel){
-    this.putRequestService.updateRequest(request);
+    this.putRequestService.updateRequest(request.id, request);
   }
 
   // Supprimer une demande resim formulée

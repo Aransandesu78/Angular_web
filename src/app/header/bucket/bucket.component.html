@@ -1,7 +1,7 @@
 <div class="Bucket Temp">
     <div class="header">
         <h1>Request Bucket Temp</h1>
-        <button class="filter">
+        <button class="filter" (click)="openModal()">
             <span>Request Filter </span>
             <fa-icon [icon]="faFilter"></fa-icon>
         </button>
@@ -15,5 +15,5 @@
     </div>
 </div>
 <div *ngIf="isModalOpen" class="filter-overlay">
-    <app-filter *ngIf="isModalOpen" (close)="closeModal()"></app-filter>
+    <app-filter (close)="closeModal()"></app-filter>
 </div>

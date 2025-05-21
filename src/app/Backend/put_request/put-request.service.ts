@@ -13,7 +13,7 @@ export class PutRequestService {
   constructor(private http : HttpClient) {}
 
   // PUT - Mettre à jour une demande resim 
-  updateRequest(request: RequestModel): Observable<RequestModel> {
-    return this.http.put<RequestModel>(`${this.apiUrl}/${request.id}`, request);
+  updateRequest(id: number, request: any): Observable<RequestModel> {
+    return this.http.put<RequestModel>(`${this.apiUrl}/${id}`, request);
   }
 }

@@ -13,7 +13,7 @@ export class PostRequestService {
   constructor(private http: HttpClient) {}
 
   // POST Créer une nouvelle demande resim
-   createRequest(request: RequestModel): Observable<any> {
+  createRequest(request: any): Observable<any> {
     return this.http.post<any>(this.apiUrl, request);
   }
 

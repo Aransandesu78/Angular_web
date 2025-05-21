@@ -12,7 +12,7 @@ export class DeleteRequestService {
   constructor(private http : HttpClient) {}
 
   // DELETE - Supprimer une demande resim
-  deleteRequest(id: number): Observable<void> {
+  deleteRequest(id: number): Observable<any> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }

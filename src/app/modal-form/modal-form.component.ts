@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { Adas, Sensors, Follow, Comments } from '../object';
-import { GetRequestService } from '../Backend/get_request/get_request.service';
+import { PostRequestService } from '../Backend/post_request/post-request.service';
 
 @Component({
   selector: 'app-modal-form',
@@ -15,6 +15,7 @@ import { GetRequestService } from '../Backend/get_request/get_request.service';
 export class ModalFormComponent implements OnInit {
   // Création d'un événement à transmettre au composant parent app.component
   @Output() close = new EventEmitter<void>();
+  postRequestService = inject(PostRequestService);
   faXmark = faXmark;
 
   // Déclaration des objets importés du fichier object.ts
@@ -71,13 +72,15 @@ export class ModalFormComponent implements OnInit {
 
   // Soumission du formulaire
   onSubmit() {
+    // Si formulaire invalide, affichage des erreurs
     if (this.form.invalid) {
       this.form.markAllAsTouched(); // Marque que tous les champs sont "touchés pour affiner les erreurs"
       return;
     }
+    // Sinon, envoi des données vers le serveur
     else {
       const formData = this.form.value;
-      // this.requestService.addRequest(formData);
+      this.postRequestService.createRequest(formData);
       console.log(formData);
     }
   }
