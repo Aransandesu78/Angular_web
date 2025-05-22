@@ -41,7 +41,6 @@ export class ModalFormComponent implements OnInit {
   // Initialisation du composant dès sa création
   ngOnInit(): void {
     this.initForm();
-    console.log("ADAS PlatformVehicule :", this.adas.PlatformVehicule);
   }
   
   // Initialisation pour la récupération du formulaire
@@ -79,9 +78,10 @@ export class ModalFormComponent implements OnInit {
     }
     // Sinon, envoi des données vers le serveur
     else {
-      const formData = this.form.value;
+      const formData = this.form.value; 
       this.postRequestService.createRequest(formData);
       console.log(formData);
+      this.closeModal(); // Fermeture du modal 
     }
   }
 

@@ -1,13 +1,14 @@
-// index.js
+// Importation des modules
 const express = require('express');
 const mysql = require('mysql2');
 const cors = require('cors');
 
+// Création de l'application
 const app = express();
 app.use(cors()); // Autorise les appels depuis Angular
 app.use(express.json());
 
-// Connexion MySQL
+// Configure la connexion
 const db = mysql.createConnection({
   host: 'localhost',
   user: 'root',
@@ -15,6 +16,7 @@ const db = mysql.createConnection({
   database: 'resim_request',
 });
 
+// Connexion à la base de données
 db.connect(err => {
   if (err) throw err;
   console.log('Connecté à la base de données MySQL');
@@ -49,13 +51,39 @@ app.put('api/requests/:id', (req, res) => {
 });
 
 // Ajouter une demande resim
-app.post('api/requests/:id', (req,res) => {
-  // Constante pour la création des colonnes de la table SQL requests
+app.post('api/requests', (req,res) => {
+  // Constante pour la déclaration des colonnes de la table SQL requests
   const requestData = req.body; // Récupère l'objet JSON de la demande Resim
-  const sql = 'INSERT INTO request SET ?';
-  db.query(sql, requestData, (err, result) => {
+  const sql =`
+    INSERT INTO request (
+      PlatformVehicule, projectVehicule, ADASDrivingOwner, TypeDriving,
+      ADASApplicantOwner, silSWFrCam, linkSilSWFrCam, silSWFrRad, linkSilSWFrRad,
+      silSWSideRad, linkSilSWSideRad, silSWAdas, linkSilSWAdas, Comments,
+      num_DDV, stateResimLoopStatus, associateResimForm) 
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
+  ;
+  const values = [
+    requestData.PlatformVehicule,
+    requestData.projectVehicule,
+    requestData.ADASDrivingOwner,
+    requestData.TypeDriving,
+    requestData.ADASApplicantOwner,
+    requestData.silSWFrCam,
+    requestData.linkSilSWFrCam,
+    requestData.silSWFrRad,
+    requestData.linkSilSWFrRad,
+    requestData.silSWSideRad,
+    requestData.linkSilSWSideRad,
+    requestData.silSWAdas,
+    requestData.linkSilSWAdas,
+    requestData.Comments,
+    requestData.numDDV, // ou requestData.num_DDV selon ce que tu as
+    requestData.stateResimLoopStatus,
+    requestData.associateResimForm
+  ];
+  db.query(sql, values, (err, result) => {
     if (err) return res.status(500).send(err);
-    res.status(201).json({message: 'Request created successfully', id: result.insertId});
+    res.json({message: 'Request created successfully', id: result.insertId});
   });
 });
 
@@ -68,6 +96,7 @@ app.delete('api/requests/:id', (req, res) => {
   });
 });
 
+// Ecoute le serveur sur le port 3000 
 app.listen(3000, () => {
   console.log('Backend server starting on port 3000');
 });
