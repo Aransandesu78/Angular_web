@@ -257,11 +257,11 @@ select {
     display: inline-block;
 }
 
-.ok {
+.OK {
     background-color: greenyellow;
 }
 
-.nok {
+.NOK {
     background-color: rgb(255, 60, 0);
 }
 

@@ -58,10 +58,10 @@ export class ResimRequestComponent {
   // On récupère la valeur saisie dans le menu déroulé
   get_adas_status() : string {
     if (this.selected_AdasStatus === 'OK'){
-      return 'ok';
+      return 'OK';
     }
     else if (this.selected_AdasStatus === 'NOK'){
-      return 'nok';
+      return 'NOK';
     }
     else {
       return '';

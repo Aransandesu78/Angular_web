@@ -5,6 +5,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { Adas, Sensors, Follow, Comments } from '../object';
 import { PostRequestService } from '../Backend/post_request/post-request.service';
+import { RequestModel } from '../request.model';
 
 @Component({
   selector: 'app-modal-form',
@@ -29,7 +30,7 @@ export class ModalFormComponent implements OnInit {
     "ADASDrivingOwner", "TypeDriving", "ADASApplicantOwner"];
 
   // Initialisation des objets dans le constructeur
-  constructor(){
+  constructor() {
     this.adas = new Adas();
     this.sensor = new Sensors();
     this.follow = new Follow();
@@ -79,7 +80,21 @@ export class ModalFormComponent implements OnInit {
     // Sinon, envoi des données vers le serveur
     else {
       const formData = this.form.value; 
-      this.postRequestService.createRequest(formData);
+      // const ResimRequestCompleted: MyObject = {
+      //   ...formData,
+      //   dateCreationResimLoopRequest: new Date(), 
+      //   DatelastModif: new Date(), 
+      //   Dateprevu: new Date(), 
+      //   dateEndResimLoop: new Date(), 
+      //   dateModifStatusBuckettemp: new Date(), 
+      //   statusBuckettemp: 
+      // };
+
+      this.postRequestService.createRequest(formData).subscribe({
+        next: (response) => console.log('Response : ', response),
+        error: (error) => console.error('Error : ', error)
+      });
+      
       console.log(formData);
       this.closeModal(); // Fermeture du modal 
     }

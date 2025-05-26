@@ -40,28 +40,29 @@ app.get('/api/requests/:id', (req, res) => {
 });
 
 // Modifier une demande resim selon l'id récupéré
-app.put('api/requests/:id', (req, res) => {
+app.put('/api/requests/:id', (req, res) => {
   const requestId = req.params.id;
   const updatedData = req.body;
-  const sql = `UPDATE request SET ? WHERE id = ?`;
-  db.query(sql, [updatedData, requestId], (err, result) => {
+  const sql = `UPDATE request SET ${updatedData} WHERE id = ${requestId}`;
+  db.query(sql, (err, result) => {
     if (err) return res.status(500).send(err);
     res.json({ message: 'Demande mise à jour avec succès', result });
   });
 });
 
 // Ajouter une demande resim
-app.post('api/requests', (req,res) => {
-  // Constante pour la déclaration des colonnes de la table SQL requests
-  const requestData = req.body; // Récupère l'objet JSON de la demande Resim
-  const sql =`
+app.post('/api/requests', (req, res) => {
+  const requestData = req.body;
+  console.log('Request body', req.body);
+  const sql = `
     INSERT INTO request (
       PlatformVehicule, projectVehicule, ADASDrivingOwner, TypeDriving,
       ADASApplicantOwner, silSWFrCam, linkSilSWFrCam, silSWFrRad, linkSilSWFrRad,
       silSWSideRad, linkSilSWSideRad, silSWAdas, linkSilSWAdas, Comments,
-      num_DDV, stateResimLoopStatus, associateResimForm) 
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
-  ;
+      num_DDV, stateResimLoopStatus, associateResimForm
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+  `;
+
   const values = [
     requestData.PlatformVehicule,
     requestData.projectVehicule,
@@ -77,18 +78,20 @@ app.post('api/requests', (req,res) => {
     requestData.silSWAdas,
     requestData.linkSilSWAdas,
     requestData.Comments,
-    requestData.numDDV, // ou requestData.num_DDV selon ce que tu as
+    requestData.numDDV, 
     requestData.stateResimLoopStatus,
     requestData.associateResimForm
   ];
+
   db.query(sql, values, (err, result) => {
     if (err) return res.status(500).send(err);
-    res.json({message: 'Request created successfully', id: result.insertId});
+    res.json({ message: 'Request created successfully', id: result.insertId });
   });
 });
 
+
 // Supprimer une demande resim selon l'id récupéré
-app.delete('api/requests/:id', (req, res) => {
+app.delete('/api/requests/:id', (req, res) => {
   const requestId = req.params.id;
   db.query('DELETE FROM request WHERE id = ?', [requestId], (err, result) => {
     if (err) return res.status(500).send(err);

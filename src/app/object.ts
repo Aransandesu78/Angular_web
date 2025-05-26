@@ -1,4 +1,7 @@
-/*** Création des objets pour les composants angular ***/  
+/*** Création des objets pour les composants angular ***/
+import { registerDispatcher } from "@angular/core/primitives/event-dispatch";
+
+  
 
 /*** Création des classes ***/
 export class User {
@@ -47,9 +50,10 @@ export class Follow {
     statusBuckettemp:  string[] = ['To validate', 'accepted', 'refused']; // To validate, accepted, refused
     associateResimForm?: string; // Link
 
-    constructor(){
-        this.dateCreationResimLoopRequest = new Date();
-        console.log(this.dateCreationResimLoopRequest);
+    // Retourne la date de modification
+    GetCurrentDate() {
+        let date = new Date();
+        return date;
     }
 }
 
