@@ -8,10 +8,11 @@ import { RequestModel } from '../request.model';
 import { PutRequestService } from '../Backend/put_request/put-request.service';
 import { DeleteRequestService } from '../Backend/delete_request/delete-request.service';
 import { GetRequestService } from '../Backend/get_request/get_request.service';
+import { ModalConfirmComponent } from "../modal-confirm/modal-confirm.component";
 
 @Component({
   selector: 'app-resim-request',
-  imports: [FontAwesomeModule, CommonModule, ReactiveFormsModule, FormsModule],
+  imports: [FontAwesomeModule, CommonModule, ReactiveFormsModule, FormsModule, ModalConfirmComponent],
   templateUrl: './resim-request.component.html',
   styleUrl: './resim-request.component.css'
 })
@@ -40,6 +41,7 @@ export class ResimRequestComponent {
   isVisible: boolean = false; 
   eu_date_format: string = 'yyyy/MM/dd'; 
   selected_AdasStatus!: string; 
+  isConfirmOpen: boolean = false; 
 
   // Initialisation des objets dans le constructeur
   constructor() {
@@ -83,5 +85,15 @@ export class ResimRequestComponent {
   // Supprimer une demande resim formulée
   deleteRequestByID(request: RequestModel): void {
     this.deleteRequestService.deleteRequest(request.id);
+  }
+
+  // Ouverture de la fenêtre modale
+  openModalConfirm(): void {
+    this.isConfirmOpen = true;
+  }
+
+  // Fermeture de la fenêtre modale
+  closeModalConfirm(): void {
+    this.isConfirmOpen = false;
   }
 }
