@@ -12,7 +12,7 @@ app.use(express.json());
 const db = mysql.createConnection({
   host: 'localhost',
   user: 'root',
-  password: '', // ou ton mdp
+  password: '', 
   database: 'resim_request',
 });
 
@@ -89,9 +89,9 @@ app.post('/api/requests', (req, res) => {
   });
 });
 
-
 // Supprimer une demande resim selon l'id récupéré
 app.delete('/api/requests/:id', (req, res) => {
+  console.log(req.params.id);
   const requestId = req.params.id;
   db.query('DELETE FROM request WHERE id = ?', [requestId], (err, result) => {
     if (err) return res.status(500).send(err);

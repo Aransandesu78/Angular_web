@@ -8,11 +8,11 @@
         </button>
     </div>
     <div class="confirm-content">
-        <h3>Are you sure you want to delete ?</h3>
+        <h3>{{data.message}}</h3>
     </div>
     <div class="choice">
         <div class="yes">
-            <button class="yes-btn">
+            <button class="yes-btn" (click)="DeleteThisRequest()">
                 <p>Yes</p>
             </button>
         </div>

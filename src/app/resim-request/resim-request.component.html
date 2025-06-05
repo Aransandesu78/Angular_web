@@ -62,12 +62,9 @@
                         <button class="modify">
                             <p>modify</p>
                         </button>
-                        <button class="delete" (click)="openModalConfirm()">
+                        <button class="delete" (click)="OpenDeleteDialog()">
                             <p>delete</p>
                         </button>
-                        <div *ngIf="isConfirmOpen" class="overlay">
-                            <app-modal-confirm (close)="closeModalConfirm()"></app-modal-confirm>
-                        </div>
                     </div>
                 </div>
             </div>

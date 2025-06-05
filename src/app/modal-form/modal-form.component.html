@@ -22,7 +22,8 @@
                         <select name="PlatformVehicule" id="PlatformVehicule-selected" formControlName="PlatformVehicule">
                             <option *ngFor="let platform of adas.PlatformVehicule" [value]="platform">{{platform}}</option>
                         </select>
-                        <div class="text-danger" *ngIf="form.controls['PlatformVehicule'].invalid && (form.controls['PlatformVehicule'].touched || form.controls['PlatformVehicule'].dirty)">
+                        <div class="text-danger" 
+                            *ngIf="form.controls['PlatformVehicule'].invalid && (form.controls['PlatformVehicule'].touched || form.controls['PlatformVehicule'].dirty)">
                             <span *ngIf="form.controls['PlatformVehicule'].errors?.['required']">This is required !</span>
                         </div>
                     </div>

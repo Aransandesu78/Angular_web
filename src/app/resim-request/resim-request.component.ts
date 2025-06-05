@@ -8,18 +8,30 @@ import { RequestModel } from '../request.model';
 import { PutRequestService } from '../Backend/put_request/put-request.service';
 import { DeleteRequestService } from '../Backend/delete_request/delete-request.service';
 import { GetRequestService } from '../Backend/get_request/get_request.service';
-import { ModalConfirmComponent } from "../modal-confirm/modal-confirm.component";
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
+import { ModalConfirmComponent } from '../modal-confirm/modal-confirm.component';
 
 @Component({
   selector: 'app-resim-request',
-  imports: [FontAwesomeModule, CommonModule, ReactiveFormsModule, FormsModule, ModalConfirmComponent],
+  imports: [
+    FontAwesomeModule, 
+    CommonModule, 
+    ReactiveFormsModule, 
+    FormsModule,
+    MatButtonModule,
+    MatDialogModule
+  ],
   templateUrl: './resim-request.component.html',
   styleUrl: './resim-request.component.css'
 })
 export class ResimRequestComponent {
+  // Propriété pour le databinding 
   @Input() isAdmin: boolean = false; // Détermine si l'utilisateur est admin 
-  @Input() request!: RequestModel;
-  @Output() SwitchEvent = new EventEmitter<boolean>();
+  @Input() request!: RequestModel; // Composant courant appelé par le parent
+  @Output() requestClicked = new EventEmitter<number>(); // Evénement pour récupérer l'id du composant sélectionner
+  @Output() SwitchEvent = new EventEmitter<boolean>(); // Evénement à envoyer au composant parent 
 
   // Importation des services 
   putRequestService = inject(PutRequestService);
@@ -44,7 +56,7 @@ export class ResimRequestComponent {
   isConfirmOpen: boolean = false; 
 
   // Initialisation des objets dans le constructeur
-  constructor() {
+  constructor( private dialog: MatDialog) {
     this.adas = new Adas();
     this.sensor = new Sensors();
     this.follow = new Follow();
@@ -78,22 +90,33 @@ export class ResimRequestComponent {
   }
 
   // Modifier la demande resim formulée 
-  modifyRequest(request: RequestModel){
-    this.putRequestService.updateRequest(request.id, request);
+  // modifyRequest(request: RequestModel){
+  //   this.putRequestService.updateRequest(request.id, request);
+  // }
+
+  // Envoie au composant parent 
+  removeRequestFromList(id: number): void {
+    this.requestClicked.emit(id);
   }
 
-  // Supprimer une demande resim formulée
-  deleteRequestByID(request: RequestModel): void {
-    this.deleteRequestService.deleteRequest(request.id);
+  // Ouverture du dialog
+  OpenDeleteDialog() {
+    // On transmet vers le composant ModalConfirmComponent l'objet data
+    const dialogRef = this.dialog.open(ModalConfirmComponent, {
+      // Données à transmettre dans l'objet data
+      data: { 
+        message: 'Are you sure you want to delete this request ?',
+        id: this.request.id
+      }
+    });
+
+    // On récupère dès la fermeture une valeur booléenne
+    dialogRef.afterClosed().subscribe(result => {
+      // Si vraie, alors on envoie au composant parent un événement pour mettre à jour la liste des demandes
+      if (result?.deleted) {
+        this.removeRequestFromList(result.id);
+      }
+    });
   }
 
-  // Ouverture de la fenêtre modale
-  openModalConfirm(): void {
-    this.isConfirmOpen = true;
-  }
-
-  // Fermeture de la fenêtre modale
-  closeModalConfirm(): void {
-    this.isConfirmOpen = false;
-  }
 }
