@@ -20,6 +20,7 @@ export interface RequestModel {
   linkSilSWAdas: string;
 
   Comments: string;
+  result_comment: string; 
   num_DDV: number;
   stateResimLoopStatus: string;
   stateADASStatus: string;

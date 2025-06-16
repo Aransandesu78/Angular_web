@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { RequestModel } from '../../request.model';
+import { User } from '../../object';
 
 @Injectable({
   providedIn: 'root'
@@ -15,5 +16,10 @@ export class PutRequestService {
   // PUT - Mettre à jour une demande resim 
   updateRequest(id: number, request: any): Observable<RequestModel> {
     return this.http.put<RequestModel>(`${this.apiUrl}/${id}`, request);
+  }
+
+  // Patch - Mettre à jour partiellement une demande
+  patchRequest(id: number, changes: Partial<RequestModel>): Observable<RequestModel> {
+    return this.http.patch<RequestModel>(`${this.apiUrl}/${id}`, changes);
   }
 }

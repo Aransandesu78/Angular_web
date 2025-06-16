@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { EventEmitter, Output } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
-import { Adas, Sensors, Follow, Comments } from '../../../object';
+import { Adas, Sensors, Follow } from '../../../object';
 
 @Component({
   selector: 'app-filter',
@@ -20,13 +20,11 @@ export class FilterComponent {
   adas!: Adas;
   sensor!: Sensors;
   follow!: Follow;
-  comments!: Comments;
 
   constructor() {
     this.adas = new Adas();
     this.sensor = new Sensors();
     this.follow = new Follow();
-    this.comments = new Comments(); 
   }
 
   // Création du formulaire 

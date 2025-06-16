@@ -77,17 +77,15 @@
     <!-- Creation d'une section commentaires -->
     <div class="optional-content" [ngClass]="{'show' : isVisible, 'hide' : !isVisible}">
         <div class="form">
-            <form [formGroup]="formGroup" (ngSubmit)="Submit()">
-                <div class="resim-comments">
-                    <label for="comments" class="form-label">Comments</label>
-                    <textarea id="comments" rows="1" cols="20" type="text" formControlName="resim_comments" class="form-comments"></textarea>
-                </div>
-                <div class="results-comments">
-                    <label for="results" class="form-label">Results</label>
-                    <textarea [readOnly]="" id="results" rows="1" cols="20" type="text" formControlName="results_comments" class="form-comments"></textarea>
-                </div>
-                <button type="submit" class="btn-submit">Submit</button>
-            </form>
+            <div class="resim-comments">
+                <label for="comments" class="form-label">Comments</label>
+                <textarea id="comments" [formControl]="resim_comments" rows="1" cols="20" type="text" class="form-comments"></textarea>
+            </div>
+            <div class="results-comments">
+                <label for="results" class="form-label">Results</label>
+                <textarea id="results" [formControl]="results_comments" rows="1" cols="20" type="text" class="form-comments"></textarea>
+            </div>
+            <button type="submit" class="btn-submit" (click)="Submit()" [disabled]="resim_comments.invalid || results_comments.invalid">Submit</button>
         </div>
     </div>
 </div>

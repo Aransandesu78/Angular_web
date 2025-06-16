@@ -1,8 +1,4 @@
 /*** Création des objets pour les composants angular ***/
-import { registerDispatcher } from "@angular/core/primitives/event-dispatch";
-
-  
-
 /*** Création des classes ***/
 export class User {
     first_name!: string; // example : Alain
@@ -57,9 +53,5 @@ export class Follow {
     }
 }
 
-export class Comments {
-    comment?: string; // Any
-    results?: string; // Any
-}
 
 

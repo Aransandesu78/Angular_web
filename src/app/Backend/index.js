@@ -9,17 +9,14 @@ app.use(cors()); // Autorise les appels depuis Angular
 app.use(express.json());
 
 // Configure la connexion
-const db = mysql.createConnection({
+const db = mysql.createPool({
   host: 'localhost',
   user: 'root',
   password: '', 
   database: 'resim_request',
-});
-
-// Connexion à la base de données
-db.connect(err => {
-  if (err) throw err;
-  console.log('Connecté à la base de données MySQL');
+  waitForConnections: true,
+  connectionLimit: 10,
+  queueLimit: 0
 });
 
 // Récupérer toutes les demandes resims de la base de données
@@ -40,12 +37,32 @@ app.get('/api/requests/:id', (req, res) => {
 });
 
 // Modifier une demande resim selon l'id récupéré
-app.put('/api/requests/:id', (req, res) => {
+app.patch('/api/requests/:id', (req, res) => {
   const requestId = req.params.id;
   const updatedData = req.body;
-  const sql = `UPDATE request SET ${updatedData} WHERE id = ${requestId}`;
-  db.query(sql, (err, result) => {
-    if (err) return res.status(500).send(err);
+
+  if (!updatedData || Object.keys(updatedData).length === 0) {
+    return res.status(400).json({ error: 'Aucune donnée à mettre à jour' });
+  }
+
+  console.log('Misa à jour ID :', requestId);
+  console.log('Données reçues :', updatedData);
+
+  // Générer dynamiquement les champs et les valeurs
+  const fields = Object.keys(updatedData);
+  const values = Object.values(updatedData);
+
+  const setClause = fields.map(field => `${field} = ?`).join(', ');
+  const sql = `UPDATE request SET ${setClause} WHERE id = ?`;
+
+  // Ajouter l'ID à la fin des valeurs
+  values.push(requestId);
+
+  db.query(sql, values, (err, result) => {
+    if (err) {
+      console.error('Erreur SQL :', err);
+      return res.status(500).send(err);
+    }
     res.json({ message: 'Demande mise à jour avec succès', result });
   });
 });

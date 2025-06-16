@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, EventEmitter, Output, inject } from '@angular/core';
+import { Component, Input, EventEmitter, Output, inject, OnInit } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { Adas, Sensors, Follow, Comments } from '../object';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Adas, Sensors, Follow } from '../object';
 import { RequestModel } from '../request.model';
 import { PutRequestService } from '../Backend/put_request/put-request.service';
 import { DeleteRequestService } from '../Backend/delete_request/delete-request.service';
@@ -26,7 +26,7 @@ import { ModalConfirmComponent } from '../modal-confirm/modal-confirm.component'
   templateUrl: './resim-request.component.html',
   styleUrl: './resim-request.component.css'
 })
-export class ResimRequestComponent {
+export class ResimRequestComponent implements OnInit{
   // Propriété pour le databinding 
   @Input() isAdmin: boolean = false; // Détermine si l'utilisateur est admin 
   @Input() request!: RequestModel; // Composant courant appelé par le parent
@@ -42,11 +42,8 @@ export class ResimRequestComponent {
   adas: Adas;
   sensor: Sensors;
   follow: Follow;
-  comments: Comments;
-  formGroup = new FormGroup({
-    resim_comments : new FormControl(''),
-    results_comments : new FormControl(''), 
-  });
+  resim_comments = new FormControl('');
+  results_comments = new FormControl(''); 
 
   // Déclaration des attributs
   faCaretDown = faCaretDown;
@@ -54,13 +51,20 @@ export class ResimRequestComponent {
   eu_date_format: string = 'yyyy/MM/dd'; 
   selected_AdasStatus!: string; 
   isConfirmOpen: boolean = false; 
+  comments!: string;
+  results!: string;
 
   // Initialisation des objets dans le constructeur
   constructor( private dialog: MatDialog) {
     this.adas = new Adas();
     this.sensor = new Sensors();
     this.follow = new Follow();
-    this.comments = new Comments(); 
+  }
+
+  ngOnInit(): void {
+    // Initialiser les champs de texte avec les valeurs existantes
+    this.resim_comments.setValue(this.request.Comments || '');
+    this.results_comments.setValue(this.request.result_comment || '');
   }
 
   // Ouverture fermeture de la section commentaires
@@ -84,15 +88,28 @@ export class ResimRequestComponent {
 
   // Soumission des commentaires 
   Submit() {
-    const formData = this.formGroup.value;
-    console.log(formData);
-    return formData;
-  }
+    if (this.resim_comments.invalid || this.results_comments.invalid) return;
 
-  // Modifier la demande resim formulée 
-  // modifyRequest(request: RequestModel){
-  //   this.putRequestService.updateRequest(request.id, request);
-  // }
+    const updatedComments = this.resim_comments.value?.trim() || '';
+    const updatedResults = this.results_comments.value?.trim() || '';
+
+    const updatedRequest: RequestModel = {
+      ...this.request,
+      Comments: updatedComments,
+      result_comment: updatedResults
+    };
+
+    this.putRequestService.patchRequest(this.request.id, updatedRequest).subscribe({
+      next: () => {
+        this.request.Comments = updatedComments;
+        this.request.result_comment = updatedResults;
+        console.log('Comments and results updated!');
+      },
+      error: err => console.error('Error in update', err)
+    });
+
+    console.log(this.request);
+  }
 
   // Envoie au composant parent 
   removeRequestFromList(id: number): void {
