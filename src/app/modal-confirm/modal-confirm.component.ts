@@ -1,5 +1,4 @@
 import { Component, Inject, inject } from '@angular/core';
-import { Output, EventEmitter } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { DeleteRequestService } from '../Backend/delete_request/delete-request.service';
@@ -12,7 +11,6 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
   styleUrl: './modal-confirm.component.css'
 })
 export class ModalConfirmComponent {
-  @Output() close = new EventEmitter<void>();
   faXmark = faXmark;
   deleteRequestService = inject(DeleteRequestService); // Injection du service
 
@@ -22,11 +20,6 @@ export class ModalConfirmComponent {
     @Inject(MAT_DIALOG_DATA) public data : any
   ) {}
   
-  // Fermeture du dialog par le bouton non et le bouton croix
-  closeModal(): void {
-    this.close.emit();
-  }
-
   // Suppression d'une demande resim
   DeleteThisRequest(): void {
     console.log(this.data);

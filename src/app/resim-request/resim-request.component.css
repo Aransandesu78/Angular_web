@@ -64,7 +64,7 @@ a:hover, a:active {
 }
 
 .adas-sensor {
-    width: 30%;
+    width: 45%;
     display: block;
     align-items: center;
     padding: 10px;
@@ -72,7 +72,7 @@ a:hover, a:active {
 
 .adas-follow-up {
     padding: 10px;
-    width: 25%;
+    width: 40%;
 }
 
 .sensor-content {
@@ -267,6 +267,7 @@ select {
 
 .request-action {
     margin-top: 10px;
+    align-items: center;
 }
 
 .modify {
@@ -286,14 +287,29 @@ select {
 }
 
 .overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 10;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 10;
 }
+
+
+
+.mat-form-field.small-date-field {
+    font-size: 13px;
+    height: 36px;
+    width: 180px; /* Ajuste la largeur selon ton besoin */
+}
+
+.mat-form-field.small-date-field .mat-input-element {
+    padding: 4px 8px;
+    font-size: 13px;
+}
+
+
 
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 1200px) {

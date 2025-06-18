@@ -3,7 +3,7 @@
         <div class="header">
             <h2>Delete request ?</h2>
         </div>
-        <button class="close-btn" (click)="closeModal()">
+        <button class="close-btn" (click)="dialogRef.close()">
             <fa-icon [icon]="faXmark"></fa-icon>
         </button>
     </div>
@@ -17,7 +17,7 @@
             </button>
         </div>
         <div class="no">
-            <button class="no-btn" (click)="closeModal()">
+            <button class="no-btn" (click)="dialogRef.close()">
                 <p>No</p>
             </button>
         </div>

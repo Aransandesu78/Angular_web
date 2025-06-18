@@ -17,6 +17,7 @@ export class GetRequestService {
     return this.http.get<RequestModel[]>(this.apiUrl);
   }
 
+  // Récupère le numéro de la demande clickée
   getRequestById(id: number): Observable<RequestModel>{
     return this.http.get<RequestModel>(`${this.apiUrl}/${id}`);
   }

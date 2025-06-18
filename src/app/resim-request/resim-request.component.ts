@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, EventEmitter, Output, inject, OnInit } from '@angular/core';
+import { Component, Input, EventEmitter, Output, inject, OnInit, ChangeDetectionStrategy, computed, signal } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -12,16 +12,31 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalConfirmComponent } from '../modal-confirm/modal-confirm.component';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatIconModule} from '@angular/material/icon';
+import {MatInputModule} from '@angular/material/input';
+import {MatDatepickerIntl, MatDatepickerModule} from '@angular/material/datepicker';
+import {DateAdapter, MAT_DATE_LOCALE, MatNativeDateModule} from '@angular/material/core';
 
 @Component({
   selector: 'app-resim-request',
+  standalone: true,
   imports: [
     FontAwesomeModule, 
     CommonModule, 
     ReactiveFormsModule, 
     FormsModule,
     MatButtonModule,
-    MatDialogModule
+    MatDialogModule,
+    MatDatepickerModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
+    MatNativeDateModule
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [
+    { provide: MAT_DATE_LOCALE, useValue: 'fr'}
   ],
   templateUrl: './resim-request.component.html',
   styleUrl: './resim-request.component.css'
@@ -38,6 +53,19 @@ export class ResimRequestComponent implements OnInit{
   deleteRequestService = inject(DeleteRequestService); 
   getRequestService = inject(GetRequestService);
 
+  // Injection des dépendances pour la création d'un calendrier
+  private readonly _adapter = inject<DateAdapter<unknown, unknown>>(DateAdapter);
+  private readonly _intl = inject(MatDatepickerIntl);
+  private readonly _locale = signal(inject<unknown>(MAT_DATE_LOCALE));
+  readonly dateFormatString = computed(() => {
+    if (this._locale() == 'fr') {
+      return 'DD/MM/YYYY';
+    }
+    else {
+      return '';
+    }
+  });
+
   // Déclaration des objets importés du fichier object.ts
   adas: Adas;
   sensor: Sensors;
@@ -50,6 +78,8 @@ export class ResimRequestComponent implements OnInit{
   isVisible: boolean = false; 
   eu_date_format: string = 'yyyy/MM/dd'; 
   selected_AdasStatus!: string; 
+  selected_stateResimLoopStatus!: string;
+  selected_dateEndResimLoop: Date | null = null; 
   isConfirmOpen: boolean = false; 
   comments!: string;
   results!: string;
@@ -62,9 +92,20 @@ export class ResimRequestComponent implements OnInit{
   }
 
   ngOnInit(): void {
+    // Format de date Français
+    this._locale.set('fr');
+    this._adapter.setLocale(this._locale());
+    this.updateCloseButtonLabel('Fermer le calendrier');
+
     // Initialiser les champs de texte avec les valeurs existantes
     this.resim_comments.setValue(this.request.Comments || '');
     this.results_comments.setValue(this.request.result_comment || '');
+    this.selected_AdasStatus = this.request.stateADASStatus || '';
+  }
+
+  updateCloseButtonLabel(label: string) {
+    this._intl.closeCalendarLabel = label;
+    this._intl.changes.next();
   }
 
   // Ouverture fermeture de la section commentaires
@@ -90,20 +131,27 @@ export class ResimRequestComponent implements OnInit{
   Submit() {
     if (this.resim_comments.invalid || this.results_comments.invalid) return;
 
+    // Supprime les espaces dans les chaînes de caractères
     const updatedComments = this.resim_comments.value?.trim() || '';
     const updatedResults = this.results_comments.value?.trim() || '';
+    const updatedStatus = this?.selected_AdasStatus;
 
+    // Objet request mis à jour 
     const updatedRequest: RequestModel = {
+      // Récupère toutes les propriétés du composant et mise à jour des suivants 
       ...this.request,
       Comments: updatedComments,
-      result_comment: updatedResults
+      result_comment: updatedResults,
+      stateADASStatus: updatedStatus
     };
 
+    // Mise à jour du composant et affichage des erreurs éventuelles
     this.putRequestService.patchRequest(this.request.id, updatedRequest).subscribe({
       next: () => {
         this.request.Comments = updatedComments;
         this.request.result_comment = updatedResults;
-        console.log('Comments and results updated!');
+        this.selected_AdasStatus = updatedStatus;
+        console.log('Comments, results and status updated!');
       },
       error: err => console.error('Error in update', err)
     });
@@ -111,7 +159,18 @@ export class ResimRequestComponent implements OnInit{
     console.log(this.request);
   }
 
-  // Envoie au composant parent 
+  // Récupération de la demande resim mise à jour
+  loadUpdateRequest() : void {
+    this.getRequestService.getRequestById(this.request.id).subscribe({
+      next: (updatedRequest) => {
+        this.request = updatedRequest;
+        this.selected_AdasStatus = updatedRequest.stateADASStatus;
+      },
+      error: err => console.error('Loading request failed', err)
+    });
+  }
+
+  // Envoie au composant parent un événement pour modifier la liste des demandes resims
   removeRequestFromList(id: number): void {
     this.requestClicked.emit(id);
   }
