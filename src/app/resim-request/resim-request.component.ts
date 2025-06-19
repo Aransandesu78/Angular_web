@@ -73,24 +73,26 @@ export class ResimRequestComponent implements OnInit{
   resim_comments = new FormControl('');
   results_comments = new FormControl(''); 
 
-  // Déclaration des attributs
-  faCaretDown = faCaretDown;
-  isVisible: boolean = false; 
-  eu_date_format: string = 'yyyy/MM/dd'; 
-  selected_AdasStatus!: string; 
-  selected_stateResimLoopStatus!: string;
-  selected_dateEndResimLoop: Date | null = null; 
-  isConfirmOpen: boolean = false; 
-  comments!: string;
-  results!: string;
-
   // Initialisation des objets dans le constructeur
   constructor( private dialog: MatDialog) {
     this.adas = new Adas();
     this.sensor = new Sensors();
     this.follow = new Follow();
   }
+  
+  // Déclaration des attributs
+  faCaretDown = faCaretDown;
+  isVisible: boolean = false; 
+  eu_date_format: string = 'yyyy/MM/dd'; 
+  selected_AdasStatus!: string; 
+  selected_stateResimLoopStatus!: string;
+  selected_statusBuckettemp: string = 'To_validate';
+  selected_dateEndResimLoop!: Date; 
+  isConfirmOpen: boolean = false; 
+  comments!: string;
+  results!: string;
 
+  // Initialise la construction du composant avant son affichage
   ngOnInit(): void {
     // Format de date Français
     this._locale.set('fr');
@@ -101,8 +103,12 @@ export class ResimRequestComponent implements OnInit{
     this.resim_comments.setValue(this.request.Comments || '');
     this.results_comments.setValue(this.request.result_comment || '');
     this.selected_AdasStatus = this.request.stateADASStatus || '';
+    this.selected_dateEndResimLoop = this.request.dateEndResimLoop || '';
+    this.selected_stateResimLoopStatus = this.request.stateResimLoopStatus || '';
+    this.selected_statusBuckettemp = this.request.statusBuckettemp || '';
   }
 
+  // Mets à jour l'affichage du bouton calendrier
   updateCloseButtonLabel(label: string) {
     this._intl.closeCalendarLabel = label;
     this._intl.changes.next();
@@ -127,6 +133,22 @@ export class ResimRequestComponent implements OnInit{
     }
   }
 
+  // Change le style css du menu déroulé
+  getBucketStatus() : string {
+    if (this.selected_statusBuckettemp === 'To_validate'){
+      return 'To_validate';
+    }
+    else if (this.selected_statusBuckettemp === 'accepted'){
+      return 'accepted';
+    }
+    else if (this.selected_statusBuckettemp === 'refused') {
+      return 'refused';
+    }
+    else {
+      return '';
+    }
+  }
+
   // Soumission des commentaires 
   Submit() {
     if (this.resim_comments.invalid || this.results_comments.invalid) return;
@@ -135,6 +157,9 @@ export class ResimRequestComponent implements OnInit{
     const updatedComments = this.resim_comments.value?.trim() || '';
     const updatedResults = this.results_comments.value?.trim() || '';
     const updatedStatus = this?.selected_AdasStatus;
+    const updatedDateEndResimLoop = this?.selected_dateEndResimLoop;
+    const updatedResimLoopStatus = this?.selected_stateResimLoopStatus;
+    const updatedstatusBuckettemp = this?.selected_statusBuckettemp;
 
     // Objet request mis à jour 
     const updatedRequest: RequestModel = {
@@ -142,7 +167,10 @@ export class ResimRequestComponent implements OnInit{
       ...this.request,
       Comments: updatedComments,
       result_comment: updatedResults,
-      stateADASStatus: updatedStatus
+      stateADASStatus: updatedStatus,
+      dateEndResimLoop: updatedDateEndResimLoop,
+      stateResimLoopStatus: updatedResimLoopStatus,
+      statusBuckettemp: updatedstatusBuckettemp
     };
 
     // Mise à jour du composant et affichage des erreurs éventuelles
@@ -151,7 +179,10 @@ export class ResimRequestComponent implements OnInit{
         this.request.Comments = updatedComments;
         this.request.result_comment = updatedResults;
         this.selected_AdasStatus = updatedStatus;
-        console.log('Comments, results and status updated!');
+        this.selected_dateEndResimLoop = updatedDateEndResimLoop;
+        this.selected_stateResimLoopStatus = updatedResimLoopStatus;
+        this.selected_statusBuckettemp = updatedstatusBuckettemp;
+        console.log('Resim request updated!');
       },
       error: err => console.error('Error in update', err)
     });
@@ -159,23 +190,13 @@ export class ResimRequestComponent implements OnInit{
     console.log(this.request);
   }
 
-  // Récupération de la demande resim mise à jour
-  loadUpdateRequest() : void {
-    this.getRequestService.getRequestById(this.request.id).subscribe({
-      next: (updatedRequest) => {
-        this.request = updatedRequest;
-        this.selected_AdasStatus = updatedRequest.stateADASStatus;
-      },
-      error: err => console.error('Loading request failed', err)
-    });
-  }
-
   // Envoie au composant parent un événement pour modifier la liste des demandes resims
+  // Demande l'identifiant de la demande 
   removeRequestFromList(id: number): void {
     this.requestClicked.emit(id);
   }
 
-  // Ouverture du dialog
+  // Ouverture du dialogue
   OpenDeleteDialog() {
     // On transmet vers le composant ModalConfirmComponent l'objet data
     const dialogRef = this.dialog.open(ModalConfirmComponent, {

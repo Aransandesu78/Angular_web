@@ -24,10 +24,10 @@ export interface RequestModel {
   num_DDV: number;
   stateResimLoopStatus: string;
   stateADASStatus: string;
-  dateCreationResimLoopRequest: string; // ou Date
-  dateEndResimLoop: string;
-  dateModifStatusBuckettemp: string;
-  statusBuckettemp: 'To_validate' | 'accepted' | 'refused';
+  dateCreationResimLoopRequest: Date; // ou Date
+  dateEndResimLoop: Date;
+  dateModifStatusBuckettemp: Date;
+  statusBuckettemp: string;
   associateResimForm: string;
 }
   

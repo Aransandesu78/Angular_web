@@ -78,7 +78,9 @@ export class ModalFormComponent implements OnInit {
     else {
       const formData = this.form.value; 
       this.postRequestService.createRequest(formData).subscribe({
-        next: (response) => console.log('Response : ', response),
+        next: (response) => {
+          console.log('Response : ', response);
+        },
         error: (error) => console.error('Error : ', error)
       });
       console.log(formData);

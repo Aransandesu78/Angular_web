@@ -53,8 +53,8 @@
                 <p>NumDDV : {{request.num_DDV}}</p><br>
                 <!-- <p>For : {{request.dateEndResimLoop | date:eu_date_format}}</p> -->
                 <!-- <p>End : {{follow.dateEndResimLoop | date:eu_date_format}}</p> -->
-                <p>For :</p>
-                <mat-form-field appearance="fill" class="small-date-field">
+                <p>Date End Resim Loop:</p>
+                <mat-form-field appearance="fill" class="small-date-field" (click)="Submit()">
                     <mat-label>Date</mat-label>
                     <input matInput [matDatepicker]="dp" [(ngModel)]="selected_dateEndResimLoop"/>
                     <mat-hint>{{dateFormatString()}}</mat-hint>
@@ -63,7 +63,13 @@
                 </mat-form-field>
                 <div class="status-selection">
                     <div class="status-selection">
-                        <label for="select-status">Status:</label>
+                        <label for="bucket-status">Buckettemp Status:</label><br>
+                        <select class="bucket-selection" name="bucket-status" id="bucket-status" [(ngModel)]="selected_statusBuckettemp" [ngClass]="getBucketStatus()" (click)="Submit()">
+                            <option *ngFor="let index of follow.statusBuckettemp" [value]="index">{{index}}</option>
+                        </select>
+                    </div>
+                    <div class="status-selection">
+                        <label for="select-status">Adas Status:</label>
                         <select name="resim-status" id="resim-status" [(ngModel)]="selected_AdasStatus" [ngClass]="get_adas_status()" (click)="Submit()">
                             <option *ngFor="let index of follow.stateADASStatus" [value]="index">{{index}}</option>
                         </select>

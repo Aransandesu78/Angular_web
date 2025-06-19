@@ -265,6 +265,22 @@ select {
     background-color: rgb(255, 60, 0);
 }
 
+.accepted {
+    background-color: greenyellow;
+}
+
+.To_validate {
+    background-color: orange;
+}
+
+.refused {
+    background-color: red;
+} 
+
+.bucket-selection {
+    font-weight: bold;
+}
+
 .request-action {
     margin-top: 10px;
     align-items: center;

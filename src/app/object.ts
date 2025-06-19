@@ -43,10 +43,10 @@ export class Follow {
     stateResimLoopStatus:  string[] = ['Open', 'To launch', 'In progress', 'Finished', 'Cancelled', 'Failed']; // Open, To launch, In progress, Finished, Cancelled, Failed
     stateADASStatus: string[] = ['OK', 'NOK']; // OK, NOK 
     dateModifStatusBuckettemp!: Date; // YYYY/MM/DD 
-    statusBuckettemp:  string[] = ['To validate', 'accepted', 'refused']; // To validate, accepted, refused
+    statusBuckettemp:  string[] = ['To_validate', 'accepted', 'refused']; // To validate, accepted, refused
     associateResimForm?: string; // Link
 
-    // Retourne la date de modification
+    // Retourne la date actuelle
     GetCurrentDate() {
         let date = new Date();
         return date;
