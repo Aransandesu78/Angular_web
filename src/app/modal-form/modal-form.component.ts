@@ -5,6 +5,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { Adas, Sensors, Follow } from '../object';
 import { PostRequestService } from '../Backend/post_request/post-request.service';
+import { RequestModel } from '../request.model';
 
 @Component({
   selector: 'app-modal-form',
@@ -77,14 +78,19 @@ export class ModalFormComponent implements OnInit {
     // Sinon, envoi des données vers le serveur
     else {
       const formData = this.form.value; 
-      this.postRequestService.createRequest(formData).subscribe({
+      const myrequest : Partial<RequestModel> = {
+        ...formData,
+        num_DDV: formData.numDDV ? parseFloat(formData.numDDV) : 0
+      };
+      delete(myrequest as any).numDDV; // Nettoyage du champ inutile après mappage
+      this.postRequestService.createRequest(myrequest).subscribe({
         next: (response) => {
           console.log('Response : ', response);
         },
         error: (error) => console.error('Error : ', error)
       });
-      console.log(formData);
-      this.closeModal(); // Fermeture du modal 
+      console.log(myrequest);
+      this.closeModal(); // Fermeture du modal + MAJ de la liste des demandes resim à afficher
       // Possibilité d'apparaître un message + notification
     }
   }

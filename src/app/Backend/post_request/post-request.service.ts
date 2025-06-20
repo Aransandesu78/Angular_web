@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { RequestModel } from '../../request.model';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class PostRequestService {
   constructor(private http: HttpClient) {}
 
   // POST Créer une nouvelle demande resim
-  createRequest(request: any): Observable<any> {
+  createRequest(request: Partial<RequestModel>): Observable<any> {
     return this.http.post<any>(this.apiUrl, request);
   }
 }
