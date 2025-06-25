@@ -47,8 +47,7 @@ export class ResimRequestComponent implements OnInit{
   @Input() request!: RequestModel; // Composant courant appelé par le parent
   @Output() requestClicked = new EventEmitter<number>(); // Evénement pour récupérer l'id du composant sélectionner
   @Output() SwitchEvent = new EventEmitter<boolean>(); // Evénement à envoyer au composant parent 
-  @Output() StatusEvent = new EventEmitter<string>() // Evénement pour récupérer le status Bucket temp au composant parent
-
+  
   // Importation des services 
   putRequestService = inject(PutRequestService);
   deleteRequestService = inject(DeleteRequestService); 
@@ -87,7 +86,7 @@ export class ResimRequestComponent implements OnInit{
   eu_date_format: string = 'yyyy/MM/dd'; 
   selected_AdasStatus!: string; 
   selected_stateResimLoopStatus!: string;
-  selected_statusBuckettemp: string = 'To_validate';
+  selected_statusBuckettemp!: string;
   selected_dateEndResimLoop!: Date; 
   isConfirmOpen: boolean = false; 
   comments!: string;
@@ -107,10 +106,6 @@ export class ResimRequestComponent implements OnInit{
     this.selected_dateEndResimLoop = this.request.dateEndResimLoop || '';
     this.selected_stateResimLoopStatus = this.request.stateResimLoopStatus || '';
     this.selected_statusBuckettemp = this.request.statusBuckettemp || '';
-  }
-
-  sendStatusBucketTemp(status: string) {
-    this.StatusEvent.emit(status);
   }
 
   // Mets à jour l'affichage du bouton calendrier
@@ -139,14 +134,14 @@ export class ResimRequestComponent implements OnInit{
   }
 
   // Change le style css du menu déroulé
-  getBucketStatus() : string {
-    if (this.selected_statusBuckettemp === 'To_validate'){
+  getBucketStatus(param: string) : string {
+    if (param === 'To_validate'){
       return 'To_validate';
     }
-    else if (this.selected_statusBuckettemp === 'accepted'){
+    else if (param === 'accepted'){
       return 'accepted';
     }
-    else if (this.selected_statusBuckettemp === 'refused') {
+    else if (param === 'refused') {
       return 'refused';
     }
     else {

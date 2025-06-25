@@ -12,7 +12,7 @@
             <h2>Resim Requests awaiting</h2>
         </div>
         <app-resim-request 
-            *ngFor="let request of requestsList" [request]="request" (StatusEvent)="getStatusBuckettemp($event)">
+            *ngFor="let request of requestsList" [request]="request">
         </app-resim-request>
     </div>
 </div>

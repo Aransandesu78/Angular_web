@@ -20,7 +20,7 @@ export class BucketComponent implements OnInit {
   isModalOpen!: boolean;
   requestsList: RequestModel[] = [];
   request!: RequestModel;
-  statusBuckettemp!: string;
+  statusBuckettemp: string = 'To_validate';
 
   // Objets à déclarer
   adas: Adas;
@@ -51,11 +51,4 @@ export class BucketComponent implements OnInit {
   closeModal(): void {
     this.isModalOpen = false;
   }
-
-  // Récupère le status bucket temp de la demande resim concernée
-  getStatusBuckettemp(status: string): void {
-    this.statusBuckettemp = status;
-    console.log(this.statusBuckettemp);
-  }
-
 }

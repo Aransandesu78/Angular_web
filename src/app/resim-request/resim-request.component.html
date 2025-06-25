@@ -64,20 +64,28 @@
                 <div class="status-selection">
                     <div class="status-selection">
                         <label for="bucket-status">Buckettemp Status:</label><br>
-                        <select class="bucket-selection" name="bucket-status" id="bucket-status" [(ngModel)]="selected_statusBuckettemp" [ngClass]="getBucketStatus()" (click)="Submit()">
+                        <select class="bucket-selection" name="bucket-status" id="bucket-status" 
+                            [(ngModel)]="selected_statusBuckettemp" 
+                            [ngClass]="getBucketStatus(this.selected_AdasStatus)" 
+                            (click)="Submit()">
                             <option *ngFor="let index of follow.statusBuckettemp" [value]="index">{{index}}</option>
                         </select>
                     </div>
                     <div class="status-selection">
                         <label for="select-status">Adas Status:</label>
-                        <select name="resim-status" id="resim-status" [(ngModel)]="selected_AdasStatus" [ngClass]="get_adas_status()" (click)="Submit()">
+                        <select name="resim-status" id="resim-status" 
+                            [(ngModel)]="selected_AdasStatus" 
+                            [ngClass]="get_adas_status()" 
+                            (click)="Submit()">
                             <option *ngFor="let index of follow.stateADASStatus" [value]="index">{{index}}</option>
                         </select>
                     </div>
                     <br>
                     <div class="status-selection">
                         <label for="State-Loop">Status Resim Loop :</label><br>
-                        <select name="loop-status" id="loop-status" [(ngModel)]="selected_stateResimLoopStatus" (click)="Submit()">
+                        <select name="loop-status" id="loop-status" 
+                            [(ngModel)]="selected_stateResimLoopStatus" 
+                            (click)="Submit()">
                             <option *ngFor="let index of follow.stateResimLoopStatus" [value]="index">{{index}}</option>
                         </select>
                     </div>
