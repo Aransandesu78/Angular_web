@@ -47,6 +47,7 @@ export class ResimRequestComponent implements OnInit{
   @Input() request!: RequestModel; // Composant courant appelé par le parent
   @Output() requestClicked = new EventEmitter<number>(); // Evénement pour récupérer l'id du composant sélectionner
   @Output() SwitchEvent = new EventEmitter<boolean>(); // Evénement à envoyer au composant parent 
+  @Output() StatusEvent = new EventEmitter<string>() // Evénement pour récupérer le status Bucket temp au composant parent
 
   // Importation des services 
   putRequestService = inject(PutRequestService);
@@ -106,6 +107,10 @@ export class ResimRequestComponent implements OnInit{
     this.selected_dateEndResimLoop = this.request.dateEndResimLoop || '';
     this.selected_stateResimLoopStatus = this.request.stateResimLoopStatus || '';
     this.selected_statusBuckettemp = this.request.statusBuckettemp || '';
+  }
+
+  sendStatusBucketTemp(status: string) {
+    this.StatusEvent.emit(status);
   }
 
   // Mets à jour l'affichage du bouton calendrier
@@ -215,5 +220,4 @@ export class ResimRequestComponent implements OnInit{
       }
     });
   }
-
 }

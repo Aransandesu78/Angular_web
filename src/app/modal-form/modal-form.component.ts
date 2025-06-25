@@ -5,6 +5,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { Adas, Sensors, Follow } from '../object';
 import { PostRequestService } from '../Backend/post_request/post-request.service';
+import { GetRequestService } from '../Backend/get_request/get_request.service';
 import { RequestModel } from '../request.model';
 
 @Component({
@@ -16,7 +17,11 @@ import { RequestModel } from '../request.model';
 export class ModalFormComponent implements OnInit {
   // Création d'un événement à transmettre au composant parent app.component
   @Output() close = new EventEmitter<void>();
+  
+  // Injection des services
   postRequestService = inject(PostRequestService);
+  
+  // Propriété pour affichage d'un icône
   faXmark = faXmark;
 
   // Déclaration des objets importés du fichier object.ts

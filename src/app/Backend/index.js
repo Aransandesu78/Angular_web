@@ -1,3 +1,5 @@
+/******************************* Configuration de la connexion *******************************/
+
 // Importation des modules
 const express = require('express');
 const mysql = require('mysql2');
@@ -19,9 +21,46 @@ const db = mysql.createPool({
   queueLimit: 0
 });
 
+
+
+/******************************* Méthodes de récupération des demandes resims *******************************/
+
 // Récupérer toutes les demandes resims de la base de données
 app.get('/api/requests', (req, res) => {
   db.query('SELECT * FROM request', (err, results) => {
+    if (err) return res.status(500).send(err);
+    res.json(results);
+  });
+});
+
+// Récupérer les demandes resims selon le filtrage sélectionné
+app.get('/api/requests', (req, res) => {
+  const filters = req.query; // Récupère tous les paramètres de la requête
+  let sql = 'SELECT * FROM request';
+  const conditions = [];
+  const values = [];
+
+  // Construit dynamiquement les conditions WHERE
+  Object.keys(filters).forEach(key => {
+    conditions.push(`${key} = ?`);
+    values.push(filters[key]);
+  });
+
+  // Ajoute les conditions à la requête SQL et manipule les chaînes de caractères si nécessaire
+  if (conditions.length > 0) {
+    sql += ' WHERE ' + conditions.join(' AND ');
+  }
+
+  db.query(sql, values, (err, results) => {
+    if (err) return res.status(500).send(err);
+    res.json(results);
+  });
+});
+
+app.get('/api/requests', (req, res) => {
+  const status = req.params.statusBuckettemp;
+  let sql = `SELECT * FROM request WHERE statusBuckettemp = ${status}`;
+  db.query(sql, (err, results) => {
     if (err) return res.status(500).send(err);
     res.json(results);
   });
@@ -35,6 +74,9 @@ app.get('/api/requests/:id', (req, res) => {
     res.json(results);
   });
 });
+
+
+/******************************* Méthodes de modifications des demandes resims *******************************/
 
 // Modifier une demande resim selon l'id récupéré
 app.patch('/api/requests/:id', (req, res) => {
@@ -66,6 +108,10 @@ app.patch('/api/requests/:id', (req, res) => {
     res.json({ message: 'Demande mise à jour avec succès', result });
   });
 });
+
+
+
+/******************************* Méthodes d'ajout des demandes resims *******************************/
 
 // Ajouter une demande resim
 app.post('/api/requests', (req, res) => {
@@ -106,6 +152,10 @@ app.post('/api/requests', (req, res) => {
   });
 });
 
+
+
+/******************************* Méthodes de suppression des demandes resims *******************************/
+
 // Supprimer une demande resim selon l'id récupéré
 app.delete('/api/requests/:id', (req, res) => {
   console.log(req.params.id);
@@ -116,7 +166,11 @@ app.delete('/api/requests/:id', (req, res) => {
   });
 });
 
-// Ecoute le serveur sur le port 3000 
+
+
+
+/******************************* Ecoute le serveur sur le port 3000 *******************************/
+
 app.listen(3000, () => {
   console.log('Backend server starting on port 3000');
 });

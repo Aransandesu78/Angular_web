@@ -15,33 +15,47 @@ import { GetRequestService } from '../../Backend/get_request/get_request.service
   styleUrl: './bucket.component.css'
 })
 export class BucketComponent implements OnInit {
+  // Création des propriétés
   faFilter = faFilter;
   isModalOpen!: boolean;
   requestsList: RequestModel[] = [];
+  request!: RequestModel;
+  statusBuckettemp!: string;
 
+  // Objets à déclarer
   adas: Adas;
   sensor: Sensors;
   follow: Follow;
 
+  // Injection d'un service et initialisation des objets
   constructor(private getRequestService : GetRequestService) {
     this.adas = new Adas();
     this.sensor = new Sensors();
     this.follow = new Follow();
   }
 
+  // Initialisation du composant avant affichage sur le DOM
   ngOnInit(): void {
-    this.getRequestService.getRequests().subscribe(data => {
+    this.getRequestService.getRequestsByStatus(this.statusBuckettemp).subscribe(data => {
       this.requestsList = data;
       console.log(this.requestsList);
     });
   }
 
-  openModal() : void {
+  // Ouverture du modal
+  openModal(): void {
     this.isModalOpen = true;
   }
 
-  closeModal() : void {
+  // Fermeture du modal
+  closeModal(): void {
     this.isModalOpen = false;
+  }
+
+  // Récupère le status bucket temp de la demande resim concernée
+  getStatusBuckettemp(status: string): void {
+    this.statusBuckettemp = status;
+    console.log(this.statusBuckettemp);
   }
 
 }

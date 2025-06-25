@@ -11,7 +11,9 @@
         <div class="title">
             <h2>Resim Requests awaiting</h2>
         </div>
-        <app-resim-request *ngFor="let request of requestsList" [request]="request"></app-resim-request>
+        <app-resim-request 
+            *ngFor="let request of requestsList" [request]="request" (StatusEvent)="getStatusBuckettemp($event)">
+        </app-resim-request>
     </div>
 </div>
 <div *ngIf="isModalOpen" class="filter-overlay">
