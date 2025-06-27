@@ -7,10 +7,11 @@ import { CommonModule } from '@angular/common';
 import { Adas, Sensors, Follow } from '../../object';
 import { RequestModel } from '../../request.model';
 import { GetRequestService } from '../../Backend/get_request/get_request.service';
+import { ModalConfirmComponent } from '../../modal-confirm/modal-confirm.component';
 
 @Component({
   selector: 'app-bucket',
-  imports: [FontAwesomeModule, ResimRequestComponent, FilterComponent, CommonModule],
+  imports: [FontAwesomeModule, ResimRequestComponent, FilterComponent, CommonModule, ModalConfirmComponent],
   templateUrl: './bucket.component.html',
   styleUrl: './bucket.component.css'
 })
@@ -19,6 +20,7 @@ export class BucketComponent implements OnInit {
   faFilter = faFilter;
   isModalOpen!: boolean;
   requestsList: RequestModel[] = [];
+  filteredRequests: RequestModel[] = [];
   request!: RequestModel;
   statusBuckettemp!: string;
 
@@ -36,10 +38,29 @@ export class BucketComponent implements OnInit {
 
   // Initialisation du composant avant affichage sur le DOM
   ngOnInit(): void {
-    this.getRequestService.getRequestsByStatus(this.statusBuckettemp).subscribe(data => {
-      this.requestsList = data;
-      console.log(this.requestsList);
-    });
+    // this.getRequestService.getRequestsByStatus(this.statusBuckettemp).subscribe(data => {
+    //   this.requestsList = data;
+    //   console.log(this.requestsList);
+    // });
+    this.loadRequests();
+  }
+
+  loadRequests(): void {
+    this.getRequestService.getRequests().subscribe((requests) => {
+      this.requestsList = requests; 
+      this.filteredRequests = [...requests];
+    })
+  }
+
+  onStatusSelected(status: string): void {
+    if (status === 'accepted') {
+      this.filteredRequests = this.requestsList.filter(
+        request => request.statusBuckettemp !== 'accepted' 
+      );
+    }
+    else {
+      this.filteredRequests = [...this.requestsList];
+    }
   }
 
   // Ouverture du modal
@@ -56,6 +77,10 @@ export class BucketComponent implements OnInit {
   getStatusBuckettemp(status: string): void {
     this.statusBuckettemp = status;
     console.log(this.statusBuckettemp);
+  }
+
+  openModalInfo(): void {
+
   }
 
 }

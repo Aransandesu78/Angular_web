@@ -57,10 +57,19 @@ app.get('/api/requests', (req, res) => {
   });
 });
 
+// Ajoute les demandes dont le statuts sont To_validate ou refused
 app.get('/api/requests', (req, res) => {
-  const status = req.params.statusBuckettemp;
-  let sql = `SELECT * FROM request WHERE statusBuckettemp = ${status}`;
-  db.query(sql, (err, results) => {
+  const status = req.query.statusBuckettemp;
+
+  if (!status) {
+    return res.status(400).send('Paramètre "statusBuckettemp" requis.');
+  }
+
+  const statusArray = status.split(',');
+  const placeholders = statusArray.map(() => '?').join(', ');
+  const sql = `SELECT * FROM request WHERE statusBuckettemp IN (${placeholders})`;
+  
+  db.query(sql, statusArray, (err, results) => {
     if (err) return res.status(500).send(err);
     res.json(results);
   });

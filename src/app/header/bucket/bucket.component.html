@@ -12,8 +12,11 @@
             <h2>Resim Requests awaiting</h2>
         </div>
         <app-resim-request 
-            *ngFor="let request of requestsList" [request]="request">
+            *ngFor="let request of filteredRequests" [request]="request" (StatusSelected)="onStatusSelected($event)">
         </app-resim-request>
+        <div *ngIf="filteredRequests.length === 0">
+            <app-modal-confirm></app-modal-confirm>
+        </div>
     </div>
 </div>
 <div *ngIf="isModalOpen" class="filter-overlay">

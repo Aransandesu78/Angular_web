@@ -47,7 +47,8 @@ export class ResimRequestComponent implements OnInit{
   @Input() request!: RequestModel; // Composant courant appelé par le parent
   @Output() requestClicked = new EventEmitter<number>(); // Evénement pour récupérer l'id du composant sélectionner
   @Output() SwitchEvent = new EventEmitter<boolean>(); // Evénement à envoyer au composant parent 
-  
+  @Output() StatusSelected = new EventEmitter<string>(); // Evénement à envoyer au bucket pour récupérer la propriété statusBuckettemp sélectionnée
+
   // Importation des services 
   putRequestService = inject(PutRequestService);
   deleteRequestService = inject(DeleteRequestService); 
@@ -83,14 +84,16 @@ export class ResimRequestComponent implements OnInit{
   // Déclaration des attributs
   faCaretDown = faCaretDown;
   isVisible: boolean = false; 
-  eu_date_format: string = 'yyyy/MM/dd'; 
+  eu_date_format: string = 'yyyy/MM/dd';
+  isConfirmOpen: boolean = false; 
+  comments!: string;
+  results!: string; 
+
+  // Attributs à récupérer 
   selected_AdasStatus!: string; 
   selected_stateResimLoopStatus!: string;
   selected_statusBuckettemp!: string;
-  selected_dateEndResimLoop!: Date; 
-  isConfirmOpen: boolean = false; 
-  comments!: string;
-  results!: string;
+  selected_dateEndResimLoop!: Date;
 
   // Initialise la construction du composant avant son affichage
   ngOnInit(): void {
@@ -134,14 +137,14 @@ export class ResimRequestComponent implements OnInit{
   }
 
   // Change le style css du menu déroulé
-  getBucketStatus(param: string) : string {
-    if (param === 'To_validate'){
+  getBucketStatus() : string {
+    if (this.selected_statusBuckettemp === 'To_validate'){
       return 'To_validate';
     }
-    else if (param === 'accepted'){
+    else if (this.selected_statusBuckettemp === 'accepted'){
       return 'accepted';
     }
-    else if (param === 'refused') {
+    else if (this.selected_statusBuckettemp === 'refused') {
       return 'refused';
     }
     else {
@@ -197,7 +200,7 @@ export class ResimRequestComponent implements OnInit{
   }
 
   // Ouverture du dialogue
-  OpenDeleteDialog() {
+  OpenDeleteDialog(): void {
     // On transmet vers le composant ModalConfirmComponent l'objet data
     const dialogRef = this.dialog.open(ModalConfirmComponent, {
       // Données à transmettre dans l'objet data
@@ -215,4 +218,10 @@ export class ResimRequestComponent implements OnInit{
       }
     });
   }
+
+  // Envoie au bucket la propriété selected_statusBuckettemp
+  onBucketStatusChange(): void {
+    this.StatusSelected.emit(this.selected_statusBuckettemp);
+  }
+
 }

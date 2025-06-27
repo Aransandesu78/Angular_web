@@ -36,7 +36,7 @@ export class GetRequestService {
   }
 
   // Récupère les demandes resims qui possèdent le status de la bucket sélectionné 
-  getRequestsByStatus(statusBuckettemp : string): Observable<RequestModel[]> {
+  getRequestsByStatus(statusBuckettemp : string[]): Observable<RequestModel[]> {
     return this.http.get<RequestModel[]>(`${this.apiUrl}`, { params: { statusBuckettemp } });
   }
 }
